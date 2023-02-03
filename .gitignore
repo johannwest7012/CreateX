@@ -1,5 +1,11 @@
 # Ignore Mac system files
 .DS_store
 
-# Ignore virtaulenv
+# Ignore myenv virtaulenv
 myenv/
+
+# Ignore Createxenv virtualenv 
+Createxenv/ 
+
+# Ignore node_modules 
+node_modules
