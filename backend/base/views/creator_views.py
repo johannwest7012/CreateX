@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from django.contrib.auth.models import User 
 from base.models import * 
-from base.creators import creators
+#from base.creators import creators
 from base.serializers import CreatorSerializer
 
 from rest_framework import status

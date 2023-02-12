@@ -3,6 +3,7 @@
 from django.urls import path 
 from base.views import user_views as views 
 
+
 # these urls access a view in user_views.py 
 
 urlpatterns = [
