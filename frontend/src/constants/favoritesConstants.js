@@ -1,0 +1,5 @@
+
+
+export const FAVS_ADD_ITEM = 'FAVS_ADD_ITEM'
+export const FAVS_REMOVE_ITEM = 'FAVS_REMOVE_ITEM'
+
