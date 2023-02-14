@@ -25,7 +25,7 @@ function HomeScreen() {
         
         <div>
             <Container>
-                <h1>Latest Stocks</h1>
+                <h1>Assets</h1>
                 {loading ? <Loader />
                     : error ? <Message variant='danger'>{error}</Message>
                     : <Row>
