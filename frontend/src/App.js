@@ -26,8 +26,8 @@ import history from './history';
 
 
 function App() {
-  return (
 
+  return (
     <Router history={history}>
           <Routes>
             <Route element={<WithoutNav />}>

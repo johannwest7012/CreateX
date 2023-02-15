@@ -3,12 +3,11 @@ import { FAVS_ADD_ITEM, FAVS_REMOVE_ITEM } from '../constants/favoritesConstants
 
 
 
-let URL = 'http://127.0.0.1:8000'
 
 
 
 export const addToFavs = (id) => async (dispatch, getState) => { 
-    const {data} = await axios.get(URL + `/api/creators/${id}`)
+    const {data} = await axios.get(`/api/creators/${id}`)
 
     dispatch({
         type:FAVS_ADD_ITEM,

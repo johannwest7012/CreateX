@@ -55,7 +55,6 @@ import {
 
 
 
-let URL = 'http://127.0.0.1:8000'
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -71,7 +70,7 @@ export const login = (email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            URL + '/api/users/login/',
+            '/api/users/login/',
             { 'username':email, 'password':password }, 
             config
             )
@@ -117,7 +116,7 @@ export const register = (name, email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            URL + '/api/users/register/',
+            '/api/users/register/',
             { 'name':name, 'email':email, 'password':password }, 
             config
             )
@@ -164,7 +163,7 @@ export const getUserDetails = (type) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            URL + `/api/users/${type}/`,
+            `/api/users/${type}/`,
             config
         )
 
@@ -207,7 +206,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
         // shows its a put request
         const {data} = await axios.put(
-            URL + `/api/users/profile/update/`,
+            `/api/users/profile/update/`,
             user,
             config
         )
@@ -266,7 +265,7 @@ export const submitUserOrder = (order) => async (dispatch, getState) => {
 
         // shows its a put request
         const {data} = await axios.put(
-            URL + `/api/users/profile/submitOrder/`,
+            `/api/users/profile/submitOrder/`,
             order,
             config
         )
@@ -314,7 +313,7 @@ export const getUserShares = (type) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            URL + `/api/users/${type}/`,
+            `/api/users/${type}/`,
             config
         )
 

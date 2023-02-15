@@ -9,13 +9,11 @@ import {CREATOR_LIST_REQUEST,
 } from '../constants/creatorConstants'
 import axios from 'axios'
 
-let URL = 'http://127.0.0.1:8000'
-
 
 export const listCreators = () => async (dispatch) => { 
 try{
     dispatch({ type: CREATOR_LIST_REQUEST })
-    const { data } = await axios.get(URL + '/api/creators/')
+    const { data } = await axios.get('/api/creators/')
     dispatch({
         type:CREATOR_LIST_SUCCESS, 
         payload: data
@@ -35,7 +33,7 @@ try{
 export const listCreatorDetails = (id) => async (dispatch) => { 
 try{
     dispatch({ type: CREATOR_DETAILS_REQUEST })
-    const { data } = await axios.get(URL + `/api/creators/${id}`)
+    const { data } = await axios.get(`/api/creators/${id}`)
     dispatch({
         type:CREATOR_DETAILS_SUCCESS, 
         payload: data
