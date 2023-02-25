@@ -14,6 +14,9 @@ import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import PortfolioScreen from './screens/PortfolioScreen'
 
+import PolicyScreen from './screens/PolicyScreen'
+
+
 
 
 
@@ -56,7 +59,11 @@ function App() {
                 <Route path='/favorites/:id?' element={<FavoritesScreen animate={true} />} />
             </Route>
             <Route element={<WithNav />}>
-                <Route path='/portfolio' element={<PortfolioScreen />} />
+                <Route path='/portfolio' element={<PortfolioScreen />} exact />
+            </Route>
+
+            <Route element={<WithNav />}>
+                <Route path='/policy' element={<PolicyScreen />} exact />
             </Route>
             
           </Routes>

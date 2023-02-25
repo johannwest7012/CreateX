@@ -50,6 +50,12 @@ function Header() {
                                 <Nav.Link>Favorites</Nav.Link>
                             </LinkContainer> 
 
+                            <NavDropdown title="About" id='about'>
+                                <LinkContainer to='/policy'>
+                                    <NavDropdown.Item>Policy</NavDropdown.Item>
+                                </LinkContainer>
+                            </NavDropdown>
+
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
                                     <LinkContainer to='/profile'>
@@ -67,8 +73,6 @@ function Header() {
                                     <Nav.Link><i className='fas fa-user'></i>Login</Nav.Link>
                                 </LinkContainer>
                             )}
-
-                           
 
                         </Nav>
                     </Navbar.Collapse>
