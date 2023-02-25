@@ -17,7 +17,8 @@ urlpatterns = [
     path('profile/', views.getUserProfile, name='user-profile'),
     path('profile/update/', views.updateUserProfile, name='user-profile-update'),
     path('profile/submitOrder/', views.submitUserOrder, name='user-profile-submitOrder'),
-    
+    path('profile/orderHistory/', views.getUserOrderHistory, name='user-profile-orderHistory'),
+
 
     
 
