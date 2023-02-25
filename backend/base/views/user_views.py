@@ -371,8 +371,8 @@ def getUserOrderHistory(request):
     buy_serializer = buyOrderShareSerializer(buyOrders, many=True)
     sell_serializer = sellOrderShareSerializer(sellOrders, many=True)
 
-    combined_serializer = buy_serializer + sell_serializer
-    return Response(combined_serializer.data)
+    buy_serializer.append(sell_serializer)
+    return Response(buy_serializer.data)
 
 
       
