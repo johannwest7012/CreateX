@@ -225,10 +225,7 @@ GitHub.sublime-settings
 .history
 
 node_modules 
-package.json
 package-lock.json
 /node_modules 
-/package.json
 /package-lock.json
 node_modules/
-frontend/node_modules/
