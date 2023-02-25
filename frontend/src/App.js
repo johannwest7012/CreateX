@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 //import Header from './components/Header'
 //import Footer from './components/Footer'
 
+import LandingScreen from './screens/LandingScreen'
 import HomeScreen from './screens/HomeScreen';
 import CreatorScreen from './screens/CreatorScreen';
 import FavoritesScreen from './screens/FavoritesScreen'
@@ -32,6 +33,9 @@ function App() {
           <Routes>
             <Route element={<WithoutNav />}>
                 <Route path='/' element={<ParticleBackground />} exact />
+            </Route>
+            <Route element={<WithNav />}>
+                <Route path='/landing' element={<LandingScreen />} exact />
             </Route>
             <Route element={<WithNav />}>
                 <Route path='/home' element={<HomeScreen />} exact />

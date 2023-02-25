@@ -1,8 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navbar, Nav, Container, Row, NavDropdown } from 'react-bootstrap'
+import { Image, Navbar, Nav, Container, Row, NavDropdown } from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import { logout } from '../actions/userActions'
+// import myLogo from './CreateXlogo-white.svg'
+import myLogo from './logo_webflow.svg'
 
 function Header() {
 
@@ -26,13 +28,23 @@ function Header() {
                     collapseOnSelect>
                 <Container>
 
-                    <LinkContainer to='/home'>
-                        <Navbar.Brand>CreateX</Navbar.Brand>
+                    <LinkContainer to='/landing'>
+                        <Navbar.Brand> 
+                            <img 
+                                src={myLogo} 
+                                alt='CreateX'
+                                style={{ maxHeight: '30%', maxWidth: '30%' }}
+                            />
+                        </Navbar.Brand>
                     </LinkContainer>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
+
+                            <LinkContainer to='/home'>
+                                <Nav.Link>Home</Nav.Link>
+                            </LinkContainer> 
 
                             <LinkContainer to='/favorites'>
                                 <Nav.Link>Favorites</Nav.Link>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import { useLocation} from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { useDispatch, useSelector} from 'react-redux'
 
 import Loader from '../components/Loader'
@@ -67,6 +67,7 @@ function ProfileScreen() {
         
     }
     return (
+        <Container>
         <Row>
             <Col md={3}>
                 <h2>User Profile</h2>
@@ -135,9 +136,10 @@ function ProfileScreen() {
 
             </Col>
             <Col md={9}>
-                <h2>My Portfolio</h2>
+                <h2>Order History</h2>
             </Col>
         </Row>
+        </Container>
     )
 }
 

@@ -30,6 +30,7 @@ function FavoritesScreen() {
      }
 
     return (
+        <Container>
         <Row>
             <Col md={8}>
                 <h1>Favorites</h1>
@@ -70,6 +71,7 @@ function FavoritesScreen() {
             <Col md={4}>
             </Col>
         </Row>
+        </Container>
     )
 }
 

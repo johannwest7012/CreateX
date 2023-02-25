@@ -57,10 +57,11 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 34, 34, 34;
   --bs-body-bg-rgb: 255, 255, 255;
+  --webflow-body-font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-family: var(--webflow-body-font-family);
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -118,17 +119,29 @@ hr {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+  /* margin-bottom: 26px; */
+  /*font-family: "News Cycle", "Arial Narrow Bold", sans-serif;*/
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  text-transform: none;
+
 }
 
 h1, .h1 {
-  font-size: calc(1.375rem + 1.5vw);
+  /* font-size: calc(1.375rem + 1.5vw); */
+  font-size: 62px;
+  letter-spacing: -2px;
+
+
+
 }
 @media (min-width: 1200px) {
   h1, .h1 {
-    font-size: 2.5rem;
+    /* font-size: 2.5rem; */
+    font-size: 62px;
+
   }
 }
 
@@ -499,6 +512,100 @@ progress {
   font-size: 1.25rem;
   font-weight: 300;
 }
+
+/* WEBFLOW styles below  
+  The CSS variables below are pulled from the Webflow css file 
+
+  IMPORTANT RULE : !!
+  - Always check if there are name conflicts with the CSS vairables you pull, 
+  if there is, put -webflow at the end of the vairables 
+*/
+
+
+
+.display {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  font-family: 'DM Sans', sans-serif;
+  color: #110c0c;
+  font-size: 120px;
+  line-height: 1em;
+  font-weight: 700;
+  letter-spacing: -6px;
+  text-transform: none;
+}
+
+.display._2 {
+  padding-bottom: 0px;
+  font-family: 'DM Sans', sans-serif;
+  color: #110c0c;
+  font-size: 120px;
+  line-height: 1em;
+  letter-spacing: -6px;
+  text-transform: none;
+  text-shadow: 0 1px 1px #fcfcfc, 1px 0 1px #f65f61;
+}
+
+.display._3 {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#be0307));
+  background-image: linear-gradient(180deg, #fff, #be0307);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 120px;
+  line-height: 1em;
+  letter-spacing: -6px;
+  text-transform: none;
+  text-shadow: none;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-section {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 80vh;
+  padding: 80px 5% 100px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.hero-section.intro {
+  overflow: hidden;
+  height: auto;
+  padding-top: 0px;
+  padding-bottom: 5%;
+  border: 1px none #000;
+}
+
+.hero-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+/* END OF WEBFLOW CSS  */
 
 .display-1 {
   font-size: calc(1.625rem + 4.5vw);
@@ -3012,12 +3119,12 @@ textarea.form-control-lg {
   --bs-btn-bg: #222;
   --bs-btn-border-color: #222;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #434343;
-  --bs-btn-hover-border-color: #383838;
+  --bs-btn-hover-bg: #ed3939;
+  --bs-btn-hover-border-color: #ed3939;
   --bs-btn-focus-shadow-rgb: 67, 67, 67;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #4e4e4e;
-  --bs-btn-active-border-color: #383838;
+  --bs-btn-active-bg: #ed3939;
+  --bs-btn-active-border-color: #ed3939;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #222;
@@ -3666,8 +3773,10 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-  font-size: var(--bs-nav-link-font-size);
-  font-weight: var(--bs-nav-link-font-weight);
+  /* font-size: var(--bs-nav-link-font-size); */
+  font-size: 14px;
+  /* font-weight: var(--bs-nav-link-font-weight); */
+  font-weight: 700;
   color: var(--bs-nav-link-color);
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
@@ -3762,6 +3871,7 @@ textarea.form-control-lg {
 .nav-justified .nav-item .nav-link {
   width: 100%;
 }
+
 
 .tab-content > .tab-pane {
   display: none;
@@ -4183,9 +4293,9 @@ textarea.form-control-lg {
 }
 
 .navbar-dark {
-  --bs-navbar-color: rgba(255, 255, 255, 0.55);
+  --bs-navbar-color: #fff;
   --bs-navbar-hover-color: rgba(255, 255, 255, 0.75);
-  --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25);
+  --bs-navbar-disabled-color: #fff;
   --bs-navbar-active-color: #fff;
   --bs-navbar-brand-color: #fff;
   --bs-navbar-brand-hover-color: #fff;
@@ -10904,9 +11014,9 @@ textarea.form-control-lg {
 }
 
 .navbar {
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
-  font-size: 18px;
-  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .navbar-brand {
@@ -10917,7 +11027,7 @@ textarea.form-control-lg {
 }
 
 .btn {
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
 }
 .btn-secondary, .btn-warning {
