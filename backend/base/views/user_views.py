@@ -362,6 +362,17 @@ def updateUserBalance(user, positive, balance_change):
             print("USER BALANCE WENT NEGATIVE, id :", user.id)
 
         return True 
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUserOrderHistory(request): 
+    buyOrders = buyOrderShare.objects.filter(user = request.user)
+    sellOrders = sellOrderShare.objects.filter(user = request.user)
+    buy_serializer = buyOrderShareSerializer(buyOrders, many=True)
+    sell_serializer = sellOrderShareSerializer(sellOrders, many=True)
+
+    combined_serializer = buy_serializer + sell_serializer
+    return Response(combined_serializer.data)
 
 
       
