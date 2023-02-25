@@ -29,7 +29,8 @@ function LandingScreen() {
                             size='lg'
                             className='btn-block' 
                             type='button'
-                            variant='dark'>
+                            variant='dark'
+                            href="/home">
                             Let's go
                         </Button>
                     </Col>

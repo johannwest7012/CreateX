@@ -31,7 +31,7 @@ const ParticleBackground = () => {
             <Col>
                 <Stack gap={0}>
                     <Image width='700' src={myLogo}/>
-                    <Link to='/home' className='btn btn-dark my-3'>Enter</Link>
+                    <Link to='/landing' className='btn btn-dark my-3'>Enter</Link>
                 </Stack>
             </Col>
             <Col></Col>
