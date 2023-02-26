@@ -40,7 +40,7 @@ function App() {
                 <Route path='/' element={<ParticleBackground />} exact />
             </Route>
             <Route element={<WithNav />}>
-                <Route path='/landing' element={<LandingScreen2 />} exact />
+                <Route path='/landing' element={<LandingScreen />} exact />
             </Route>
             <Route element={<WithNav />}>
                 <Route path='/home' element={<HomeScreen />} exact />

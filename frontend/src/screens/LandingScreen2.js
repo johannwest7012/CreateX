@@ -5,6 +5,7 @@ import Creator from '../components/Creator'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import CoverPic from '../components/CoverPic'
+import CreatorGrid from '../components/CreatorGrid'
 
 import heroimg from './images/createxheroimg1.png'
 
@@ -17,7 +18,7 @@ function LandingScreen2() {
 
     return (
         <Container>
-            <Container className="hero-section intro" style={{ height: '100vh' }}>
+            <Container className="hero-section intro" style={{ height: '95vh', marginBottom: '0px' }}>
                 <Container >
                     <Row className="justify-content-center align-items-center" style={{ height: '50%' }}>
                         <Col className="justify-content-center">
@@ -34,6 +35,7 @@ function LandingScreen2() {
                                 Let's go
                             </Button>
                             
+                            
                         </Col>
                         </Row>
                         <Row style={{ height: '50%' }}>
@@ -42,7 +44,15 @@ function LandingScreen2() {
                         </Col>
                     </Row>
                 </Container>
+                
             </Container>
+            <Row style={{margin: '20px', marginTop: '0px'}}>
+                
+                <h3>Top Creators</h3>
+        
+            </Row>
+            <CreatorGrid></CreatorGrid>
+            
         </Container>
 
   

@@ -5,20 +5,29 @@ import Creator from '../components/Creator'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import CoverPic from '../components/CoverPic'
-
-import heroimg from './images/createxheroimg1.png'
+import CreatorGrid from '../components/CreatorGrid'
+import Box from '@mui/material/Box';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 // import { listCreators } from '../actions/creatorActions'
 
-// className="d-flex align-items-center justify-content-center" style={{ height: '100vh' }}
 function LandingScreen() {
+    
+   
 
     
 
     return (
 
-
-        <CoverPic/>
+        <div style={{ minHeight: 400, width: '100%' }}>
+            <CoverPic/>
+            <Row style={{margin: '20px', marginTop: '20px'}}>
+                
+                <h3>Top Creators</h3>
+        
+            </Row>
+            <CreatorGrid></CreatorGrid>
+        </div>
         
        
         
