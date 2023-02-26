@@ -14,7 +14,7 @@ function PolicyScreen() {
         <html>
         <head>
             <title>Policy</title>
-        </head>ç
+        </head>
         <body>
             <h1>Policy</h1>
             <h2>Terms and Conditions</h2>
