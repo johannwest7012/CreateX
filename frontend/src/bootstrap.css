@@ -513,14 +513,20 @@ progress {
   font-weight: 300;
 }
 
-/* WEBFLOW styles below  
-  The CSS variables below are pulled from the Webflow css file 
+/* Custo, styles below  
+  The CSS variables below are pulled from the Webflow css file or custom made
 
   IMPORTANT RULE : !!
   - Always check if there are name conflicts with the CSS vairables you pull, 
   if there is, put -webflow at the end of the vairables 
 */
 
+.no-padding {
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-right: 0 !important;
+
+}
 
 
 .display {

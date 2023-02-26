@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 //import Footer from './components/Footer'
 
 import LandingScreen from './screens/LandingScreen'
+import LandingScreen2 from './screens/LandingScreen2'
+
 import HomeScreen from './screens/HomeScreen';
 import CreatorScreen from './screens/CreatorScreen';
 import FavoritesScreen from './screens/FavoritesScreen'
@@ -38,7 +40,7 @@ function App() {
                 <Route path='/' element={<ParticleBackground />} exact />
             </Route>
             <Route element={<WithNav />}>
-                <Route path='/landing' element={<LandingScreen />} exact />
+                <Route path='/landing' element={<LandingScreen2 />} exact />
             </Route>
             <Route element={<WithNav />}>
                 <Route path='/home' element={<HomeScreen />} exact />
