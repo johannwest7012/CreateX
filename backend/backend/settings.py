@@ -21,7 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-h1kfds@k04)*df*19%p(3!=u&_evh)6g&j-axc4z5t9304@_x('
-SECRET_KEY = 'django-insecure-v^kapoq5zc0q-bcd+3tu7*th1$+32cta@ohd&--d%%2mmbccsc'
+from .secrets import DJANGO_KEY 
+SECRET_KEY = DJANGO_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -137,14 +138,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
+from .secrets import NAME, USER, PASSWORD, HOST
+
 # Productioin Postgres database 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'johannwest',
-        'PASSWORD' : '70124278',
-        'HOST' : 'createx-database1.c6imz89yshmf.us-east-2.rds.amazonaws.com',
+        'NAME': NAME,
+        'USER': USER,
+        'PASSWORD' : PASSWORD,
+        'HOST' : HOST,
         'PORT' : '5432',
     }
 }
