@@ -7,6 +7,7 @@ import Message from '../components/Message'
 
 
 import { listCreators } from '../actions/creatorActions'
+import history from '../history'
 
 
 function HomeScreen() {
@@ -14,10 +15,13 @@ function HomeScreen() {
     const creatorList = useSelector(state => state.creatorList)
     const {error, loading, creators} = creatorList
 
+    let keyword = history.location.search
+    console.log(keyword)
+
     useEffect(()=> {
-        dispatch(listCreators())
+        dispatch(listCreators(keyword))
         
-    }, [dispatch])
+    }, [dispatch, keyword])
 
   
 

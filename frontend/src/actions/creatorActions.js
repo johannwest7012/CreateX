@@ -10,10 +10,10 @@ import {CREATOR_LIST_REQUEST,
 import axios from 'axios'
 
 
-export const listCreators = () => async (dispatch) => { 
+export const listCreators = (keyword = '') => async (dispatch) => { 
 try{
     dispatch({ type: CREATOR_LIST_REQUEST })
-    const { data } = await axios.get('/api/creators/')
+    const { data } = await axios.get(`/api/creators${keyword}`)
     dispatch({
         type:CREATOR_LIST_SUCCESS, 
         payload: data

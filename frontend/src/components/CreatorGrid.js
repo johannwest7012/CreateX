@@ -24,7 +24,7 @@ function CreatorGrid() {
         {
             field: 'price',
             headerName: 'Price',
-            type: 'numebr',
+            type: 'number',
             valueFormatter: ({ value }) => {
               if (value === null) {
                 return '';
@@ -55,7 +55,6 @@ function CreatorGrid() {
             rows={rows}
             columns={columns}
             pageSize={5}
-            pagination={false}
             autoHeight
             checkboxSelection
             disableSelectionOnClick
