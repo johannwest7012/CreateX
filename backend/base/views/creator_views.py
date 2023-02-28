@@ -9,7 +9,34 @@ from base.serializers import CreatorSerializer
 
 from rest_framework import status
 
+import google.auth
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 
+@api_view(['GET'])
+def getCreatorStats(request, pk): 
+    creator = Creator.objects.get(_id=pk)
+    creator_yt_id = creator.yt_id
+
+    CLIENT_SECRET_FILE = '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'
+    API_KEY = 'AIzaSyDlLf_57TpSg-uImu_OybMSX44zzg0Ps5k'
+
+    # YouTube Data API scope
+    SCOPES = ['https://www.googleapis.com/youtube/v3/channels']
+
+    # Authenticate with OAuth 2.0
+    creds = None
+    # Manual auth needed if the client secret or API key fails
+    if not creds or not creds.valid:
+        flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
+        creds = flow.run_local_server(port=0)
+    service = build('youtube', 'v3', credentials=creds, developerKey=API_KEY)
+
+    # Request data from the YouTube Data API
+    request = service.channels().list(part='statistics', id=creator_yt_id)
+    response = request.execute()
+    return response
 
 @api_view(['GET'])
 def getCreators(request): 
