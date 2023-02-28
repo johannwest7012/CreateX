@@ -4,6 +4,7 @@ import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { useDispatch, useSelector} from 'react-redux'
 
 import Loader from '../components/Loader'
+import Order from'../components/OrderCard'
 import Message from '../components/Message'
 
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
@@ -137,6 +138,8 @@ function ProfileScreen() {
             </Col>
             <Col md={9}>
                 <h2>Order History</h2>
+                <Order></Order>
+
             </Col>
         </Row>
         </Container>

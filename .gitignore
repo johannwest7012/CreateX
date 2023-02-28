@@ -1,5 +1,6 @@
 # Secrets file 
 secrets.py
+client_secret.json
 
 # Ignore Mac system files
 .DS_store
