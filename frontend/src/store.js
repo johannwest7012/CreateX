@@ -9,6 +9,7 @@ import {userLoginReducer,
         userUpdateProfileReducer,
         userSubmitOrderReducer,
         userSharesReducer,
+        userOrderHistoryReducer,
     } from './reducers/userReducers'
 
 const reducer = combineReducers({
@@ -21,6 +22,7 @@ const reducer = combineReducers({
     userUpdateProfile: userUpdateProfileReducer,
     //userSubmitOrder: userSubmitOrderReducer,
     userShares: userSharesReducer,
+    userOrderHistory: userOrderHistoryReducer,
 })
 
 const favItemsFromStorage = localStorage.getItem('favItems') ?

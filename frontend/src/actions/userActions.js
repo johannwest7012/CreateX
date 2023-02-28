@@ -27,6 +27,10 @@ import {
     USER_SHARES_SUCCESS,
     USER_SHARES_FAIL,
 
+    USER_ORDER_HISTORY_REQUEST,
+    USER_ORDER_HISTORY_SUCCESS,
+    USER_ORDER_HISTORY_FAIL,
+
  } from '../constants/userConstants'
 
 // Actions are imported and used in screens 
@@ -335,10 +339,10 @@ export const getUserShares = (type) => async (dispatch, getState) => {
 }
 
 
-export const getUserOrderHistory = (type) => async (dispatch, getState) => {
+export const getUserOrderHistory = () => async (dispatch, getState) => {
     try{ 
         dispatch({
-            type: USER_ORDERS_REQUEST
+            type: USER_ORDER_HISTORY_REQUEST
         })
 
         const {
@@ -358,14 +362,14 @@ export const getUserOrderHistory = (type) => async (dispatch, getState) => {
         )
 
         dispatch({
-            type: USER_ORDERS_SUCCESS, 
+            type: USER_ORDER_HISTORY_SUCCESS, 
             payload: data 
            
         })
 
     } catch(error){
         dispatch({
-            type: USER_ORDERS_FAIL,
+            type: USER_ORDER_HISTORY_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
