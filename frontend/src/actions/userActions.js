@@ -335,3 +335,41 @@ export const getUserShares = (type) => async (dispatch, getState) => {
 }
 
 
+export const getUserOrderHistory = (type) => async (dispatch, getState) => {
+    try{ 
+        dispatch({
+            type: USER_ORDERS_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers:{
+                'Content-type':'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.get(
+            `/api/users/profile/orderHistory`,
+            config
+        )
+
+        dispatch({
+            type: USER_ORDERS_SUCCESS, 
+            payload: data 
+           
+        })
+
+    } catch(error){
+        dispatch({
+            type: USER_ORDERS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+
+}
