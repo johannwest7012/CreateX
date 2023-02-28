@@ -1,5 +1,5 @@
 
 # make sure to activate your virtualenv first 
 # the do 'pip install ' and copy past the line below 
-
-django-cors-headers==3.13.0 djangorestframework==3.14.0 djangorestframework-simplejwt==5.2.2 Pillow==9.4.0
+# need to have postgresql installed, with mac it is 'brew install postgresql' 
+psycopg2 django-cors-headers==3.13.0 djangorestframework==3.14.0 djangorestframework-simplejwt==5.2.2 Pillow==9.4.0

@@ -27,6 +27,10 @@ import {
     USER_SHARES_SUCCESS,
     USER_SHARES_FAIL,
 
+    USER_ORDER_HISTORY_REQUEST,
+    USER_ORDER_HISTORY_SUCCESS,
+    USER_ORDER_HISTORY_FAIL,
+
  } from '../constants/userConstants'
 
 // Actions are imported and used in screens 
@@ -335,3 +339,41 @@ export const getUserShares = (type) => async (dispatch, getState) => {
 }
 
 
+export const getUserOrderHistory = () => async (dispatch, getState) => {
+    try{ 
+        dispatch({
+            type: USER_ORDER_HISTORY_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers:{
+                'Content-type':'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.get(
+            `/api/users/profile/orderHistory`,
+            config
+        )
+
+        dispatch({
+            type: USER_ORDER_HISTORY_SUCCESS, 
+            payload: data 
+           
+        })
+
+    } catch(error){
+        dispatch({
+            type: USER_ORDER_HISTORY_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+
+}
