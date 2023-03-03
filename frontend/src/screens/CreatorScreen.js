@@ -93,7 +93,7 @@ function CreatorScreen() {
             dispatch(getUserShares('shares'))
             let pass = false 
             for (let i = 0; i < shares.length; i++){
-                if (creator._id === shares[i].creator) { 
+                if (creator._id === shares[i].creator && shares[i].in_transit === false) { 
                     pass = true 
                 }
             }

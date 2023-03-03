@@ -34,7 +34,7 @@ function HomeScreen() {
                     : error ? <Message variant='danger'>{error}</Message>
                     : <Row>
                     {creators.map(creator => (
-                        <Col key={creator._id}sm={12} md={6} lg={4} xl={3}> 
+                        <Col key={creator._id} sm={12} md={6} lg={4} xl={3}> 
                             <Creator creator={creator}/>
                         </Col>
                         ))}

@@ -87,6 +87,11 @@ def updateUserProfile(request):
 @permission_classes([IsAuthenticated])
 def submitUserOrder(request):
     # CHANGE send over seller id when you un-hardcode the seller being johannwest
+
+    # The margin for the market making 
+    MARGIN = Decimal(0.01)
+    BID_INCREMENT = Decimal(0.015)
+
     data = request.data
     print(data)
     pk = data['pk']
@@ -110,13 +115,16 @@ def submitUserOrder(request):
 
     elif buy_sell == 'sell': 
         try:
+            chosen_share = CreatorShare.objects.filter(creator = creator_obj).filter(in_transit = False).filter(user = request.user)[0]
             order = sellOrderShare.objects.create(
                 user = request.user,
                 creator = creator_obj,
                 price = order_price,
                 isFulfilled = False,
-                share = CreatorShare.objects.filter(creator = creator_obj).filter(user = request.user)[0],
+                share = chosen_share,
             )
+            chosen_share.in_transit = True 
+            chosen_share.save()
             serializer = sellOrderShareSerializer(order, many=False)
 
         except:
@@ -145,7 +153,7 @@ def submitUserOrder(request):
         found = False 
         for i in creator_sell_order_arr: 
             # search for sell order with a price less than or equal to 99% of the buy order, you keep the 1%
-            if i.price <= (order_price * Decimal(0.99)): 
+            if i.price <= (order_price * (Decimal(1.00) - MARGIN)): 
                 #FOUND MATCH 
                 found = True 
                 match_sell_order = i 
@@ -183,20 +191,29 @@ def submitUserOrder(request):
             profit = order.price - match_sell_order.price
             print('Market making profit:', profit)
 
+            #Mark share as NO LONGER in transit 
+            share.in_transit = False 
+
             order.save()
             match_sell_order.save()
             share.save()
             buyer.save()
             seller.save()
-
+            
             serializer = buyOrderShareSerializer(order, many=False)
-            return Response(serializer.data)
+            print('Match Found: ', match_sell_order)
+
 
         else: 
             order.save()
             print('No match found, order will be backlogged')
-            return Response(serializer.data)
             # do not match, leave order be 
+
+        # Buy price tracking update 
+        creator_obj.price = (creator_obj.price * (Decimal(1.00) + (BID_INCREMENT)))
+        creator_obj.save()
+        return Response(serializer.data)
+
 
 
         # CHANGE EVENTUALLY for optmiz CreatorShare should not be its own obj see figma notes 
@@ -220,7 +237,7 @@ def submitUserOrder(request):
         # IMPLEMENT EDGE CASE : there are buy orders greater than the sell order price but not by a whole 1%
         for i in creator_buy_order_arr: 
             # checks to see if buy order we are iterated on is in the right price range, and they buyer has the funds
-            if i.price >= (order_price * Decimal(1.01)) and i.user.profile.balance >= order.price: 
+            if i.price >= (order_price * (Decimal(1.00) + MARGIN)) and i.user.profile.balance >= order.price: 
                 #FOUND MATCH 
                 found = True 
                 match_buy_order = i 
@@ -259,21 +276,31 @@ def submitUserOrder(request):
             profit = match_buy_order.price - order.price
             print('Market making profit:', profit)
 
+            #Mark share as NO LONGER in transit 
+            share.in_transit = False 
+
             order.save()
             match_buy_order.save()
+            share.save()
             buyer.save()
             seller.save()
-            share.save()
 
             serializer = sellOrderShareSerializer(order, many=False)
-            return Response(serializer.data)
+            print('Match Found: ', match_buy_order)
 
         else: 
             order.save()
             print('No match found, order will be backlogged')
-            return Response(serializer.data)
             # do not match, leave order be 
         
+        # SELL price tracking update 
+        print('Old price', creator_obj.price)
+        creator_obj.price = (creator_obj.price * (Decimal(1.00) - (BID_INCREMENT)))
+        creator_obj.save()
+        print('New price', creator_obj.price)
+
+        return Response(serializer.data)
+
 
     
 

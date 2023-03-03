@@ -55,7 +55,7 @@ class Creator(models.Model):
     balance = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     rating = models.IntegerField(null=True, blank=True, default=0)
-    price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
     yt_id = models.TextField(max_length=30, null=True, blank=True)
@@ -70,11 +70,16 @@ class CreatorShare(models.Model):
     creator = models.ForeignKey(Creator, on_delete=models.SET_NULL, null=True)
     #user who owns the C-Share
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    #if true than this share is tied to an outstanding order and cannot be tied to another order 
+    in_transit = models.BooleanField(default=False)
+
+
     #pull price from Creator object, no reason to be constantly updating the price 
     #on every single CreatorShare object 
 
+
     def __str__(self) -> str:
-        return str("id:" + str(self._id) + "   creator id:" + str(self.creator) + "   user id:" + str(self.user))
+        return str("id:" + str(self._id) + "   creator id:" + str(self.creator) + "   user id:" + str(self.user) + "  IN TRANSIT :" + str(self.in_transit))
 
 class CreatorToken(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
@@ -83,7 +88,7 @@ class CreatorToken(models.Model):
     #user who owns the token 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     #price will get updated consistently based on outstanding BUY offers 
-    price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True)
     #thumbnail image 
     image = models.ImageField(null=True, blank=True)
     #rating 
@@ -98,28 +103,28 @@ class buyOrderShare(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     creator = models.ForeignKey(Creator, on_delete=models.SET_NULL, null=True)
     #buy or sell 
-    price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True)
     isFulfilled = models.BooleanField(default=False)
     fulfilledAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     share = models.ForeignKey(CreatorShare, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return str("id: " + str(self._id) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
+        return str("share_id: " + str(self.share) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
 
 class sellOrderShare(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     creator = models.ForeignKey(Creator, on_delete=models.SET_NULL, null=True)
     #buy or sell 
-    price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True)
     isFulfilled = models.BooleanField(default=False)
     fulfilledAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     share = models.ForeignKey(CreatorShare, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return str("id: " + str(self._id) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
+        return str("share_id: " + str(self.share) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
 
 # NOT CURRENTLY USED but will implement for accounting purposes  
 class OrderToken(models.Model):
