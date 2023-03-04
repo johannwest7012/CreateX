@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Creator from '..src/components/Creator'
-import Loader from '..src/components/Loader'
-import Message from '..src/components/Message'
+import Creator from '../components/Creator'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 describe('Creator', () => {
   test('renders without crashing', () => {
