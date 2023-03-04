@@ -19,7 +19,7 @@ def getCreatorStats(request, pk):
     creator = Creator.objects.get(_id=pk)
     creator_yt_id = creator.yt_id
 
-    CLIENT_SECRET_FILE = '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'
+    CLIENT_SECRET_FILE = 'backend/client_secret.json'
     API_KEY = 'AIzaSyDlLf_57TpSg-uImu_OybMSX44zzg0Ps5k'
 
     # YouTube Data API scope
