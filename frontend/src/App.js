@@ -9,12 +9,17 @@ import LandingScreen from './screens/LandingScreen'
 import LandingScreen2 from './screens/LandingScreen2'
 
 import HomeScreen from './screens/HomeScreen';
+
+import ChartCreatorScreen from './screens/ChartCreatorScreen';
 import CreatorScreen from './screens/CreatorScreen';
+
+
 import FavoritesScreen from './screens/FavoritesScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import PortfolioScreen from './screens/PortfolioScreen'
+
 
 import PolicyScreen from './screens/PolicyScreen'
 
@@ -55,7 +60,7 @@ function App() {
                 <Route path='/profile' element={<ProfileScreen />} />
             </Route>
             <Route element={<WithNav />}>
-                <Route path='/creator/:id' element={<CreatorScreen animate={true} />} />
+                <Route path='/creator/:id' element={<ChartCreatorScreen animate={true} />} />
             </Route>
             <Route element={<WithNav />}>
                 <Route path='/favorites/:id?' element={<FavoritesScreen animate={true} />} />

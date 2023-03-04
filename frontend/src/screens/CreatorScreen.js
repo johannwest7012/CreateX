@@ -8,9 +8,12 @@ import { getUserShares } from '../actions/userActions'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import LineChart from '../components/LineChart'
 
 import history from '../history'
 import { submitUserOrder } from '../actions/userActions'
+import { Line } from '@nivo/line'
+
 
 
 function CreatorScreen() {
@@ -116,6 +119,9 @@ function CreatorScreen() {
         }
     }
 
+   
+    
+
 
     // useEffect(() => {
     //     if(!userInfo){
@@ -155,7 +161,7 @@ function CreatorScreen() {
                             </ListGroup.Item>
 
                             <ListGroup.Item>
-                                Price: ${creator.price}
+                                Price: ${(creator.price).slice(0,-1)}
                             </ListGroup.Item>
 
                             <ListGroup.Item>
@@ -234,15 +240,13 @@ function CreatorScreen() {
                             {message && <Message variant='danger'>{message}</Message>}
 
                         </Card>
-
                     </Col>
-
             </Row>
                 )
             }
-
-        </Container>   
+        </Container>  
         </div>
+       
     )
 }
 

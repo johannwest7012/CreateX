@@ -29,7 +29,7 @@ function HomeScreen() {
         
         <div>
             <Container>
-                <h1>Assets</h1>
+                <h1>Creators</h1>
                 {loading ? <Loader />
                     : error ? <Message variant='danger'>{error}</Message>
                     : <Row>

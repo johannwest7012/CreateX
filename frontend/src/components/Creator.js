@@ -5,7 +5,9 @@ import history from '../history'
 
 
 function Creator({ creator }) {
-  return (
+    
+
+    return (
     <Card className='my-3 p-3 rounded'>
         <Link to={`/creator/${creator._id}`}>
             <Card.Img src={creator.image} />
@@ -26,11 +28,11 @@ function Creator({ creator }) {
             </Card.Text>
 
             <Card.Text as='h3'>
-                ${creator.price}
+                ${(creator.price).slice(0,-1)}
             </Card.Text>
         </Card.Body>
     </Card>
-  )
+    )
 }
 
 export default Creator
