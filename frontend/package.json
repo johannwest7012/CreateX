@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.10",
     "@mui/x-data-grid": "^5.17.25",
+    "@nivo/line": "^0.80.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -31,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "BROWSER=none react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -40,7 +40,12 @@ def getCreatorStats(request, pk):
 
 @api_view(['GET'])
 def getCreators(request): 
-    creators = Creator.objects.all()
+    query = request.query_params.get('keyword')
+    print('query:', query)
+    if query == None: 
+        query = ''
+
+    creators = Creator.objects.filter(name__icontains=query)
     serializer = CreatorSerializer(creators, many=True)
     return Response(serializer.data)
 

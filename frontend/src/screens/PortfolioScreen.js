@@ -10,6 +10,7 @@ import history from '../history'
 
 
 import { getUserShares } from '../actions/userActions'
+import { listCreators } from '../actions/creatorActions'
 
 
 function PortfolioScreen() {
@@ -26,6 +27,7 @@ function PortfolioScreen() {
             history.push('/login')
         }else{
             dispatch(getUserShares('shares'))
+            dispatch(listCreators())
         }
     }, [dispatch, history, userInfo])
   
@@ -39,7 +41,7 @@ function PortfolioScreen() {
                     : error ? <Message variant='danger'>{error}</Message>
                     : <Row>
                     {shares.map(share => (
-                        <Col key={share._id}sm={12} md={6} lg={4} xl={3}> 
+                        <Col key={share._id} sm={12} md={6} lg={4} xl={3}> 
                             <Share share={share}/>
                         </Col>
                         ))}
