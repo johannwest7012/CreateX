@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import {CREATOR_LIST_REQUEST, 
     CREATOR_LIST_SUCCESS, 
     CREATOR_LIST_FAIL,
@@ -7,7 +9,6 @@ import {CREATOR_LIST_REQUEST,
     CREATOR_DETAILS_FAIL,
 
 } from '../constants/creatorConstants'
-import axios from 'axios'
 
 
 export const listCreators = (keyword = '') => async (dispatch) => { 

@@ -6,7 +6,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 
-import { listCreators } from '../actions/creatorActions'
+import { listCreators } from '../actions/creatorActions.js'
 import history from '../history'
 
 

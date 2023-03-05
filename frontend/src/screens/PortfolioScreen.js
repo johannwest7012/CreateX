@@ -10,7 +10,7 @@ import history from '../history'
 
 
 import { getUserShares } from '../actions/userActions'
-import { listCreators } from '../actions/creatorActions'
+import { listCreators } from '../actions/creatorActions.js'
 
 
 function PortfolioScreen() {

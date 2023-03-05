@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams} from 'react-router-dom'
 
 import { Row, Col, Image, ListGroup, Button, Card, Form, Container} from 'react-bootstrap'
-import { listCreatorDetails } from '../actions/creatorActions'
+import { listCreatorDetails } from '../actions/creatorActions.js'
 import { getUserShares } from '../actions/userActions'
 
 import Loader from '../components/Loader'
