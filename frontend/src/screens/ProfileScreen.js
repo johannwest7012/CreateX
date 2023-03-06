@@ -27,7 +27,12 @@ function ProfileScreen() {
     const { error, loading, user } = userDetails
 
     const userOrderHistory = useSelector(state => state.userOrderHistory)
-    const { error2, loading2, order_history } = userOrderHistory
+    const order_history = userOrderHistory.order_history
+    const history_loading = userOrderHistory.loading
+    const history_error = userOrderHistory.error
+    const history_success = userOrderHistory.success
+
+    console.log('success' + history_success)
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -50,7 +55,7 @@ function ProfileScreen() {
                 setBalance(user.balance)
             }
         }
-        if(!order_history){
+        if(!order_history || !history_success){
             dispatch(getUserOrderHistory())
         }
     }, [dispatch, history, userInfo, user, success])
@@ -74,7 +79,6 @@ function ProfileScreen() {
         
     }
 
-    console.log("history" + order_history)
     return (
         <Container>
         <Row>
@@ -147,13 +151,13 @@ function ProfileScreen() {
             <Col md={9}>
                 <h2>Order History</h2>
 
-                {loading2 ? <Loader />
-                    : error2 ? <Message variant='danger'>{error2}</Message>
+                {history_loading ? <Loader />
+                    : history_error ? <Message variant='danger'>{history_error}</Message>
                     : <Row>
-                    {order_history.map(order => (
-                        <Col key={order.key} sm={12} md={6} lg={4} xl={3}> 
-                            <Order order={order}/>
-                        </Col>
+                        {order_history.map(order => (
+                            <Col key={order.key} sm={12} md={6} lg={4} xl={3}> 
+                                <Order order={order}/>
+                            </Col>
                         ))}
                     </Row>
                 }

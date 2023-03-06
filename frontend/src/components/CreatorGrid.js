@@ -39,13 +39,13 @@ function CreatorGrid() {
       ];
       
       const rows = [
-        { id: 1, lastName: '', firstName: 'Cody Ko', price: 35.00 },
+        { id: 1, lastName: '', firstName: 'Cody Ko', price: 45.00 },
         { id: 2, lastName: '', firstName: 'Mr. Beast', price: 42.00 },
-        { id: 3, lastName: '', firstName: 'PewDiePie', price: 45.00 },
-        { id: 4, lastName: '', firstName: 'Taylor Swift', price: 16.00 },
-        { id: 5, lastName: '', firstName: 'Dude Perfect', price: 10.00 },
-        { id: 6, lastName: '', firstName: null, price: 150.00 },
-        { id: 7, lastName: '', firstName: 'Ferrara', price: 44.00 },
+        { id: 3, lastName: '', firstName: 'PewDiePie', price: 38.00 },
+        { id: 4, lastName: '', firstName: 'KSI', price: 25.00 },
+        { id: 5, lastName: '', firstName: 'Logan Paul', price: 23.00 },
+        { id: 6, lastName: '', firstName: null, price: 17.00 },
+        { id: 7, lastName: '', firstName: 'Emma Chamberlain', price: 44.00 },
         { id: 8, lastName: '', firstName: 'Rossini', price: 36.00 },
         { id: 9, lastName: '', firstName: 'Harvey', price: 65.00 },
       ];
