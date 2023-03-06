@@ -6,6 +6,11 @@ import {
     CREATOR_DETAILS_REQUEST, 
     CREATOR_DETAILS_SUCCESS, 
     CREATOR_DETAILS_FAIL,
+
+    CREATOR_PRICE_LOG_REQUEST, 
+    CREATOR_PRICE_LOG_SUCCESS, 
+    CREATOR_PRICE_LOG_FAIL,
+
 } from '../constants/creatorConstants'
  
 export const creatorListReducer = (state = {creators:[]}, action) => { 
@@ -33,6 +38,22 @@ export const creatorDetailsReducer = (state = {creator:[]}, action) => {
             return { loading:false, creator: action.payload}
         
         case CREATOR_DETAILS_FAIL: 
+            return { loading:false, error: action.payload}
+
+        default: 
+            return state 
+    }
+}
+
+export const creatorPriceLogReducer = (state = {priceLog:[]}, action) => { 
+    switch(action.type){
+        case CREATOR_PRICE_LOG_REQUEST: 
+            return { loading:true, priceLog:[]}
+
+        case CREATOR_PRICE_LOG_SUCCESS: 
+            return { loading:false, priceLog: action.payload}
+        
+        case CREATOR_PRICE_LOG_FAIL: 
             return { loading:false, error: action.payload}
 
         default: 

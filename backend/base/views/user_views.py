@@ -78,6 +78,13 @@ def updateUserProfile(request):
     return Response(serializer.data)
 
 
+# The helper is called in a loop for multiple quanitites of buy or sell 
+# WILL NEED BIG CHANGES TO GET THIS TO WORK 
+# SPRINT 3 
+def submitUserOrderHelper(): 
+    print()
+
+
 # updateUserTransaction()
 # takes user when they buy a share/token
 # updates their balance accordingly 
@@ -97,6 +104,7 @@ def submitUserOrder(request):
     pk = data['pk']
     buy_sell = data['buy_sell']
     order_price = Decimal(data['price'])
+    #quantity = int(data['quantity'])
     creator_obj = Creator.objects.get(_id=pk)
 
     if buy_sell == 'buy' and request.user.profile.balance > order_price: 
@@ -212,7 +220,16 @@ def submitUserOrder(request):
         # Buy price tracking update 
         creator_obj.price = (creator_obj.price * (Decimal(1.00) + (BID_INCREMENT)))
         creator_obj.save()
+    
+        #Add to price log 
+        new_price_log = creatorPriceLog.objects.create(
+                creator = creator_obj,
+                cur_price = creator_obj.price,
+            )
+        new_price_log.save()
+
         return Response(serializer.data)
+
 
 
 
@@ -294,10 +311,16 @@ def submitUserOrder(request):
             # do not match, leave order be 
         
         # SELL price tracking update 
-        print('Old price', creator_obj.price)
         creator_obj.price = (creator_obj.price * (Decimal(1.00) - (BID_INCREMENT)))
         creator_obj.save()
-        print('New price', creator_obj.price)
+
+        #Add to price log 
+        new_price_log = creatorPriceLog.objects.create(
+                creator = creator_obj,
+                cur_price = creator_obj.price,
+            )
+        new_price_log.save()
+
 
         return Response(serializer.data)
 

@@ -1,7 +1,9 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { creatorListReducer, creatorDetailsReducer } from './reducers/creatorReducers'
+import { creatorListReducer, 
+        creatorDetailsReducer,
+        creatorPriceLogReducer } from './reducers/creatorReducers'
 import { favoritesReducer } from './reducers/favoritesReducers'
 import {userLoginReducer, 
         userRegisterReducer, 
@@ -15,6 +17,7 @@ import {userLoginReducer,
 const reducer = combineReducers({
     creatorList: creatorListReducer,
     creatorDetails: creatorDetailsReducer,
+    creatorPriceLog: creatorPriceLogReducer, 
     favorites : favoritesReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer, 

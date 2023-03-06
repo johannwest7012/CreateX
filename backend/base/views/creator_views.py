@@ -3,16 +3,24 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
 from django.contrib.auth.models import User 
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 from base.models import * 
 #from base.creators import creators
-from base.serializers import CreatorSerializer
+from base.serializers import *
 
 from rest_framework import status
+
+from django.contrib.auth.models import User 
+
 
 #import google.auth
 #from google.oauth2.credentials import Credentials
 #from google_auth_oauthlib.flow import InstalledAppFlow
 #from googleapiclient.discovery import build
+
+
+
 
 @api_view(['GET'])
 def getCreatorStats(request, pk): 
@@ -65,4 +73,33 @@ def getCreatorShares(request):
     creator = Creator.objects.get(_id=pk)
     serializer = CreatorSerializer(creator, many=False)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getCreatorPriceLog(request, pk):
+    logs = creatorPriceLog.objects.filter(creator=pk)
+    serializer = CreatorPriceLogSerializer(logs, many=True)
+    return Response(serializer.data) 
+
+
+
+## Allows creation of CreatorShares in mass 
+## currently only available for use in Postman
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def makeCreatorShares(request, pk): 
+    print('Entering makeCreatorShares')
+    data = request.data
+    print("PK: ",pk)
+    quantity = int(data['quantity'])
+    user = data['user']
+    user_obj = User.objects.get(id = user)
+    creator_obj = Creator.objects.get(_id=pk)
+    for i in range(quantity): 
+        CreatorShare.objects.create(
+                creator = creator_obj,
+                user = user_obj, 
+                in_transit = False
+        )
+    return HttpResponse(status=201)
+
 

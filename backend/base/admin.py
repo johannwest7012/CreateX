@@ -15,6 +15,7 @@ admin.site.register(sellOrderShare)
 admin.site.register(OrderToken)
 admin.site.register(Profile)
 admin.site.register(BalanceChange)
+admin.site.register(creatorPriceLog)
 
 #Tutorial
 admin.site.register(Review)

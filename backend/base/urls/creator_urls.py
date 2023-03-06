@@ -14,5 +14,11 @@ urlpatterns = [
     # For querying a single creator, calls the getProuduct view, 
     # which takes the parameter "pk", which we are specifying in path
     path('<str:pk>/', views.getCreator, name='creator'),
-    path('stats/<str:pk>/', views.getCreatorStats, name='creator-stats')
+    path('priceLog/<str:pk>/', views.getCreatorPriceLog, name='creato-price-log'),
+
+    path('stats/<str:pk>/', views.getCreatorStats, name='creator-stats'),
+
+    #Admin add creatos 
+    path('makeCreatorShares/<str:pk>/', views.makeCreatorShares, name='make-creator-shares'),
+
 ]

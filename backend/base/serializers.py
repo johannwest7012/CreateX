@@ -45,6 +45,15 @@ class CreatorShareSerializer(serializers.ModelSerializer):
         model = CreatorShare
         fields = '__all__'
 
+class CreatorPriceLogSerializer(serializers.ModelSerializer): 
+    formatted_dt = serializers.SerializerMethodField()
+
+    class Meta: 
+        model = creatorPriceLog
+        fields = ['_id','cur_price','date_time','formatted_dt']
+
+    def get_formatted_dt(self, obj):
+        return obj.date_time.strftime("%m-%d %H:%M:%S")
 
 class buyOrderShareSerializer(serializers.ModelSerializer): 
     class Meta: 

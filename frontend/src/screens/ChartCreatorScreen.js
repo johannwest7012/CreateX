@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams} from 'react-router-dom'
 
 import { Row, Col, Image, ListGroup, Button, Card, Form, Container} from 'react-bootstrap'
-import { listCreatorDetails } from '../actions/creatorActions.js'
+import { listCreatorDetails, listCreatorPriceLog } from '../actions/creatorActions.js'
 import { getUserShares } from '../actions/userActions'
 
 import Loader from '../components/Loader'
@@ -53,6 +53,9 @@ function ChartCreatorScreen() {
     const creatorDetails = useSelector(state => state.creatorDetails)
     const { loading, error, creator } = creatorDetails
 
+    const creatorPriceLog = useSelector(state => state.creatorPriceLog)
+    const { price_log_loading, price_log_error, priceLog } = creatorPriceLog
+
     const userDetails = useSelector(state => state.userDetails)
     const { user_error, user_loading, user } = userDetails
 
@@ -61,11 +64,12 @@ function ChartCreatorScreen() {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-
  
     useEffect(()=> {
         dispatch(listCreatorDetails(params.id))
+        dispatch(listCreatorPriceLog(params.id))
     }, [dispatch])
+
 
     function addToFavHandler(){
         //console.log('Add to favs:', params.id)
@@ -184,14 +188,14 @@ function ChartCreatorScreen() {
                                         fontWeight="600"
                                         color={colors.grey[100]}
                                     >
-                                        Creator Name
+                                        {creator.name}
                                     </Typography>
                                     <Typography
                                         variant="h5"
                                         fontWeight="600"
                                         color={colors.greenAccent[500]}
                                     >
-                                        $58.38
+                                        ${creator.price}
                                     </Typography>
                                     </Box>
                                     <Box>
@@ -201,7 +205,7 @@ function ChartCreatorScreen() {
                                     </Box>
                                 </Box>
                                 <Box height="250px" m="-20px 0 0 0">
-                                    <LineChart isDashboard={true} />
+                                    <LineChart price_log = {priceLog} />
                                 </Box>
                             </Box>
                         </Grid>

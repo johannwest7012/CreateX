@@ -4,7 +4,41 @@ import { useTheme } from "@mui/material";
 import { tokens } from "./theme";
 import { mockLineData } from "./data/mockData";
 
-const LineChart = ({ isDashboard = false }) => {
+const LineChart = ({price_log}) => {
+  console.log(price_log[0])
+
+  // Only use the last so many values for the log
+  // Last 3 values
+  const cur_log = price_log.slice(-5)
+  console.log(cur_log)
+
+  let line_data = []
+  for (let i = 0; i < cur_log.length; i++){
+    line_data.push(
+      {
+        x: cur_log[i].formatted_dt,
+        y: cur_log[i].cur_price
+      }
+    )
+  }
+
+
+  const realLineData = [
+    {
+      id: "Price",
+      color: tokens("dark").redAccent[200],
+      data: line_data
+    }
+  ];
+
+
+
+
+
+
+
+
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -44,8 +78,8 @@ const LineChart = ({ isDashboard = false }) => {
         },
       }}
       curve="catmullRom"
-      data={mockLineData}
-      colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
+      data={realLineData}
+      colors={{ datum: "color" }}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{
@@ -60,10 +94,11 @@ const LineChart = ({ isDashboard = false }) => {
       axisRight={null}
       axisBottom={{
         orient: "bottom",
+        tickValues: [],
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "transportation",
+        legend: undefined ,
         legendOffset: 36,
         legendPosition: "middle",
       }}
@@ -73,12 +108,12 @@ const LineChart = ({ isDashboard = false }) => {
         tickValues: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "count",
+        legend: undefined ,
         legendOffset: -40,
         legendPosition: "middle",
       }}
       enableGridX={false}
-      enableGridY={!isDashboard}
+      enableGridY={true}
       pointSize={10}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}

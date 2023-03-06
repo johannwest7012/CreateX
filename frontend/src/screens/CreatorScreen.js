@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams} from 'react-router-dom'
 
 import { Row, Col, Image, ListGroup, Button, Card, Form, Container} from 'react-bootstrap'
-import { listCreatorDetails } from '../actions/creatorActions.js'
+import { listCreatorDetails, getCreatorPriceLog } from '../actions/creatorActions.js'
 import { getUserShares } from '../actions/userActions'
 
 import Loader from '../components/Loader'
@@ -32,6 +32,7 @@ function CreatorScreen() {
 
     const creatorDetails = useSelector(state => state.creatorDetails)
     const { loading, error, creator } = creatorDetails
+
 
     const userDetails = useSelector(state => state.userDetails)
     const { user_error, user_loading, user } = userDetails
@@ -75,7 +76,8 @@ function CreatorScreen() {
                     'id' : user.id, 
                     'pk' : creator._id,
                     'buy_sell' : 'buy',
-                    'price' : creator.price
+                    'price' : creator.price,
+                    'quantity' : 1
                 }))
                 setMessage('')
                 history.push('/profile/')
@@ -106,7 +108,8 @@ function CreatorScreen() {
                     'id' : user.id, 
                     'pk' : creator._id,
                     'buy_sell' : 'sell',
-                    'price' : creator.price
+                    'price' : creator.price, 
+                    'quantity' : 1
                 }))
                 setMessage('')
                 history.push('/profile/')

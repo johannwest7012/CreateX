@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields.jsonb import JSONField as JSOBField
+
 
 
 # for Profile funcs 
@@ -63,6 +65,19 @@ class Creator(models.Model):
 
     def __str__(self):
         return str(str(self.name) + '   _id:' + str(self._id))
+    
+
+class creatorPriceLog(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+    creator = models.ForeignKey(Creator, on_delete=models.SET_NULL, null=True)
+    cur_price = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True)
+    date_time = models.DateTimeField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return str('   _id:' + str(self._id) + '  creator:' + str(self.creator) + '   cur_price:' + str(self.cur_price) + '   date_time:' + str(self.date_time))
+
+
 
 class CreatorShare(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
