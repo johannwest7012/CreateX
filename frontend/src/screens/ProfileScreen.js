@@ -7,7 +7,7 @@ import Loader from '../components/Loader'
 import Order from'../components/OrderCard'
 import Message from '../components/Message'
 
-import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { getUserDetails, getUserOrderHistory, updateUserProfile } from '../actions/userActions'
 import { USER_UPDATE_PROFILE_RESET } from'../constants/userConstants'
 
 import history from '../history'
@@ -25,6 +25,9 @@ function ProfileScreen() {
     
     const userDetails = useSelector(state => state.userDetails)
     const { error, loading, user } = userDetails
+
+    const userOrderHistory = useSelector(state => state.userOrderHistory)
+    const { error2, loading2, order_history } = userOrderHistory
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -47,6 +50,9 @@ function ProfileScreen() {
                 setBalance(user.balance)
             }
         }
+        if(!order_history){
+            dispatch(getUserOrderHistory())
+        }
     }, [dispatch, history, userInfo, user, success])
 
     const submitHandler = (e) => {
@@ -67,6 +73,8 @@ function ProfileScreen() {
         }
         
     }
+
+    console.log("history" + order_history)
     return (
         <Container>
         <Row>
@@ -138,7 +146,19 @@ function ProfileScreen() {
             </Col>
             <Col md={9}>
                 <h2>Order History</h2>
-                <Order></Order>
+
+                {loading2 ? <Loader />
+                    : error2 ? <Message variant='danger'>{error2}</Message>
+                    : <Row>
+                    {order_history.map(order => (
+                        <Col key={order.key} sm={12} md={6} lg={4} xl={3}> 
+                            <Order order={order}/>
+                        </Col>
+                        ))}
+                    </Row>
+                }
+                
+                
 
             </Col>
         </Row>

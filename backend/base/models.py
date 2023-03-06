@@ -123,6 +123,7 @@ class buyOrderShare(models.Model):
     fulfilledAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     share = models.ForeignKey(CreatorShare, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
+    order_type = models.CharField(max_length=10, default='BUY', editable=False)
 
     def __str__(self) -> str:
         return str("share_id: " + str(self.share) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
@@ -131,12 +132,13 @@ class sellOrderShare(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     creator = models.ForeignKey(Creator, on_delete=models.SET_NULL, null=True)
-    #buy or sell 
     price = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True)
     isFulfilled = models.BooleanField(default=False)
     fulfilledAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     share = models.ForeignKey(CreatorShare, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
+    order_type = models.CharField(max_length=10, default='SELL', editable=False)
+
 
     def __str__(self) -> str:
         return str("share_id: " + str(self.share) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))

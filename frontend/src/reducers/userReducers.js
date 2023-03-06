@@ -155,7 +155,7 @@ export const userOrderHistoryReducer = (state = {order_history: []}, action) => 
             return { loading:true } 
 
         case USER_ORDER_HISTORY_SUCCESS: 
-            return { loading:false, success:true, shares: action.payload}
+            return { loading:false, success:true, order_history: action.payload}
         
         case USER_ORDER_HISTORY_FAIL: 
             return { loading:false, error: action.payload }

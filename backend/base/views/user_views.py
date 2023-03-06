@@ -359,6 +359,23 @@ def getUserShares(request):
     serializer = CreatorShareSerializer(shares, many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUserBuyOrders(request): 
+    shares = buyOrderShare.objects.filter(user = request.user)
+    serializer = buyOrderShareSerializer(shares, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUserSellOrders(request): 
+    shares = sellOrderShare.objects.filter(user = request.user)
+    serializer = sellOrderShareSerializer(shares, many=True)
+    return Response(serializer.data)
+
+
 # updateUserBalance()
 # params : 
 #  user - the user,  positive - boolean, True for adding balance False for subtracting,  balance_change - balance change
@@ -422,8 +439,14 @@ def getUserOrderHistory(request):
     sell_serializer = sellOrderShareSerializer(sellOrders, many=True)
 
     combined_data = buy_serializer.data + sell_serializer.data 
+    sorted_data = sorted(combined_data, key=lambda k: k['createdAt'], reverse=True)
 
-    return Response(combined_data)
+    key = 0
+    for i in sorted_data: 
+        i['key'] = key
+        key += 1 
+
+    return Response(sorted_data)
 
 
       
