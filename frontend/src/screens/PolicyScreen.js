@@ -11,16 +11,12 @@ function PolicyScreen() {
 
     return (
         <Container>
-        <html>
-        <head>
-            <title>Policy</title>
-        </head>
-        <body>
+      
+            <br></br>
             <h1>Policy</h1>
             <h2>Terms and Conditions</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget mauris quis lorem fringilla auctor. Suspendisse mollis ipsum quis mi lobortis, sed aliquam nulla iaculis.</p>
-        </body>
-        </html>
+     
         </Container>
     )
 }

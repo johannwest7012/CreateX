@@ -36,7 +36,8 @@ function PortfolioScreen() {
         
         <div>
             <Container>
-                <h1>Your Portfolio</h1>
+                <br></br>
+                <h1>Portfolio</h1>
                 {loading ? <Loader />
                     : error ? <Message variant='danger'>{error}</Message>
                     : <Row>

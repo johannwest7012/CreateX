@@ -39,7 +39,7 @@ function CreatorGrid() {
       ];
       
       const rows = [
-        { id: 1, lastName: '', firstName: 'Cody Ko', price: 45.00 },
+        { id: 10, lastName: '', firstName: 'Cody Ko', price: 45.00 },
         { id: 2, lastName: '', firstName: 'Mr. Beast', price: 42.00 },
         { id: 3, lastName: '', firstName: 'PewDiePie', price: 38.00 },
         { id: 4, lastName: '', firstName: 'KSI', price: 25.00 },
@@ -50,7 +50,7 @@ function CreatorGrid() {
         { id: 9, lastName: '', firstName: 'Harvey', price: 65.00 },
       ];
     return (
-        <div style={{ minHeight: 400, width: '100%' }}>
+        <div style={{ minHeight: 400, width: '100%', marginTop: '20px', marginBottom: '20px'}}>
         <DataGrid
             rows={rows}
             columns={columns}
@@ -59,6 +59,7 @@ function CreatorGrid() {
             checkboxSelection
             disableSelectionOnClick
             experimentalFeatures={{ newEditingApi: true }}
+            className="rounded-0"
         />
         </div>
     )

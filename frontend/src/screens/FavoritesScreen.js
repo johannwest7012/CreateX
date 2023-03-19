@@ -33,6 +33,7 @@ function FavoritesScreen() {
         <Container>
         <Row>
             <Col md={8}>
+                <br></br>
                 <h1>Favorites</h1>
                 {favItems.length === 0 ?(
                     <Message variant='infor'>
@@ -44,13 +45,13 @@ function FavoritesScreen() {
                             <ListGroup.Item key={item.creator}>
                                 <Row>
                                     <Col md={2}>
-                                        <Image src={item.image} alt={item.name} fluid rounded/>
+                                        <Image src={item.image} alt={item.name} fluid roundedCircle/>
                                     </Col>
                                     <Col md={3}>
                                         <Link to={`/creator/${item.creator}`}>{item.name}</Link>
                                     </Col>
                                     <Col md={2}>
-                                        {item.rating} Rating
+                                       ${item.price} 
                                     </Col>
                                     <Col md={1}>
                                         <Button 

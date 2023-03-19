@@ -83,6 +83,7 @@ function ProfileScreen() {
         <Container>
         <Row>
             <Col md={3}>
+                <br></br>
                 <h2>User Profile</h2>
                 <h3>Balance : {balance}</h3>
                 {message && <Message variant='danger'>{message}</Message>}
@@ -91,7 +92,7 @@ function ProfileScreen() {
 
                 <Form onSubmit={submitHandler}>
 
-                    <Form.Group controlId='name'>
+                    <Form.Group controlId='name' style={{marginBottom: '20px'}}>
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             required
@@ -104,7 +105,7 @@ function ProfileScreen() {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId='email'>
+                    <Form.Group controlId='email' style={{marginBottom: '20px'}}>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control
                             required
@@ -118,7 +119,7 @@ function ProfileScreen() {
                     </Form.Group>
 
 
-                    <Form.Group controlId='password'>
+                    <Form.Group controlId='password' style={{marginBottom: '20px'}}>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type='password'
@@ -130,7 +131,7 @@ function ProfileScreen() {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId='passwordConfirm'>
+                    <Form.Group controlId='passwordConfirm' style={{marginBottom: '20px'}}>
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control
                             type='password'
@@ -142,13 +143,17 @@ function ProfileScreen() {
                         </Form.Control>
                     </Form.Group>
 
-                    <Button type='submit' variant='primary'>
+                    <Button style={{marginTop: '20px'}} type='submit' variant='primary'>
                         Update
                     </Button>
                 </Form>
+                <Button style={{marginTop: '20px', marginBottom: '20px'}} type='submit' variant='primary'>
+                        Delete Account
+                </Button>
 
             </Col>
             <Col md={9}>
+                <br></br>
                 <h2>Order History</h2>
 
                 {history_loading ? <Loader />

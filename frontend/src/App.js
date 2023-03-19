@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import LandingScreen from './screens/LandingScreen'
 import LandingScreen2 from './screens/LandingScreen2'
+import LandingScreen3 from './screens/LandingScreen3'
+
 
 import HomeScreen from './screens/HomeScreen';
 
@@ -45,7 +47,7 @@ function App() {
                 <Route path='/' element={<ParticleBackground />} exact />
             </Route>
             <Route element={<WithNav />}>
-                <Route path='/landing' element={<LandingScreen />} exact />
+                <Route path='/landing' element={<LandingScreen3 />} exact />
             </Route>
             <Route element={<WithNav />}>
                 <Route path='/home' element={<HomeScreen />} exact />

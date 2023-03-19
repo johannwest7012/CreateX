@@ -24,7 +24,7 @@ function SearchBox() {
                 type = 'text'
                 name = 'q'
                 onChange = {(e) => setKeyword(e.target.value)}
-                className =  'mr-sm-2 ml-sm-5'
+                className =  'mr-sm-2 ml-sm-5 rounded-1'
             >
             </Form.Control>
             <Col className='p-1'></Col>
@@ -32,6 +32,7 @@ function SearchBox() {
                 type = 'submit'
                 variant='primary'
                 className='p-2'
+        
             >
                 Search
             </Button>
