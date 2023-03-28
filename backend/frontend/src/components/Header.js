@@ -48,7 +48,7 @@ function Header() {
                         <Nav className="mr-auto">
 
                             <LinkContainer to='/home'>
-                                <Nav.Link>Home</Nav.Link>
+                                <Nav.Link>Creators</Nav.Link>
                             </LinkContainer> 
 
                             <LinkContainer to='/favorites'>
