@@ -27,25 +27,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
+SECRET_KEY = os.environ.get('SECRET_KEY')
+NAME = os.environ.get('NAME')
+USER = os.environ.get('USER')
+PASSWORD = os.environ.get('PASSWORD')
+HOST = os.environ.get('HOST')
+AWSACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWSSECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 if os.getcwd() == '/app':
     DEBUG = False 
     
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    NAME = os.environ.get('NAME')
-    USER = os.environ.get('USER')
-    PASSWORD = os.environ.get('PASSWORD')
-    HOST = os.environ.get('HOST')
-    AWSACCESS_KEY_ID = os.environ.get('AWSACCESS_KEY_ID')
-    AWSSECRET_ACCESS_KEY = os.environ.get('AWSSECRET_ACCESS_KEY')
-else: 
-    from .secrets import *
-    SECRET_KEY = SDJANGO_KEY
-    NAME = SNAME 
-    USER = SUSER
-    PASSWORD = SPASSWORD
-    HOST = SHOST
-    AWSACCESS_KEY_ID = SAWS_ACCESS_KEY_ID
-    AWSSECRET_ACCESS_KEY = SAWS_SECRET_ACCESS_KEY
+
 
 
 
@@ -134,6 +126,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
+
+print("HOTTY", os.environ.get('NAME'))
 
 TEMPLATES = [
     {
