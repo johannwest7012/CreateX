@@ -22,15 +22,36 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-h1kfds@k04)*df*19%p(3!=u&_evh)6g&j-axc4z5t9304@_x('
-from .secrets import *
-SECRET_KEY = DJANGO_KEY
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
-if os.cwd() == '/app':
+if os.getcwd() == '/app':
     DEBUG = False 
+    
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    NAME = os.environ.get('NAME')
+    USER = os.environ.get('USER')
+    PASSWORD = os.environ.get('PASSWORD')
+    HOST = os.environ.get('HOST')
+    AWSACCESS_KEY_ID = os.environ.get('AWSACCESS_KEY_ID')
+    AWSSECRET_ACCESS_KEY = os.environ.get('AWSSECRET_ACCESS_KEY')
+else: 
+    from .secrets import *
+    SECRET_KEY = SDJANGO_KEY
+    NAME = SNAME 
+    USER = SUSER
+    PASSWORD = SPASSWORD
+    HOST = SHOST
+    AWSACCESS_KEY_ID = SAWS_ACCESS_KEY_ID
+    AWSSECRET_ACCESS_KEY = SAWS_SECRET_ACCESS_KEY
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+
+
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'createx.herokuapp.com']
 
 
 # Application definition
@@ -146,7 +167,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
-from .secrets import NAME, USER, PASSWORD, HOST
 
 # Productioin Postgres database 
 
