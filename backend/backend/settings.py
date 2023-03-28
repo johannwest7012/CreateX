@@ -127,7 +127,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
-print("HOTTY", os.environ.get('NAME'))
 
 TEMPLATES = [
     {
