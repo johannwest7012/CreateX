@@ -22,13 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-h1kfds@k04)*df*19%p(3!=u&_evh)6g&j-axc4z5t9304@_x('
-from .secrets import DJANGO_KEY 
+from .secrets import *
 SECRET_KEY = DJANGO_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True 
+if os.cwd() == '/app':
+    DEBUG = False 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -97,6 +99,8 @@ SIMPLE_JWT = {
 MIDDLEWARE = [
     # custom
     "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
 
     # default
     'django.middleware.security.SecurityMiddleware',
@@ -205,7 +209,9 @@ STATICFILES_DIRS = [
 
 # for user uploaded content 
 # (anytime we have a file uploaded from a model, where to upload those folders)
-MEDIA_ROOT = 'static/images'
+MEDIA_ROOT = BASE_DIR / 'static/images'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # cors policy 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -220,8 +226,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # AWS not currently working 
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_ACCESS_KEY_ID = 'AKIA3SJZGM4FP2S3KAV3'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = AWSACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = AWSSECRET_ACCESS_KEY
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -229,6 +235,5 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_AUTHENTICATION_METHOD = 'AWS4-HMAC-SHA256'
 
 AWS_STORAGE_BUCKET_NAME = 'createx-bucket'
-
 
 
