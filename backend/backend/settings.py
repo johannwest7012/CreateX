@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     # custom 
     'rest_framework',
     'corsheaders',
+    'storages',
 
     'base.apps.BaseConfig',
     
@@ -111,7 +113,9 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend/build')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -195,7 +199,8 @@ MEDIA_URL = '/images/'
 
 # tell django about static files folder
 STATICFILES_DIRS = [ 
-    BASE_DIR / 'static'
+    BASE_DIR / 'static', 
+    BASE_DIR / 'frontend/build/static'
 ]
 
 # for user uploaded content 
@@ -210,3 +215,20 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# AWS not currently working 
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_ACCESS_KEY_ID = 'AKIA3SJZGM4FP2S3KAV3'
+AWS_SECRET_ACCESS_KEY = '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'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+AWS_S3_AUTHENTICATION_METHOD = 'AWS4-HMAC-SHA256'
+
+AWS_STORAGE_BUCKET_NAME = 'createx-bucket'
+
+
+
