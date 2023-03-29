@@ -55,6 +55,7 @@ def registerUser(request):
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def updateUserProfile(request): 
+    
     user = request.user
     serializer = UserSerializerWithToken(user, many=False)
 
@@ -66,6 +67,8 @@ def updateUserProfile(request):
     user.first_name = data['name']
     user.username = data['email']
     user.email = data['email']
+
+
 
     # we do not want to update password if they do not have one yet 
     # make_password() takes in the string password and hashes it 
@@ -80,9 +83,9 @@ def updateUserProfile(request):
 
 # The helper is called in a loop for multiple quanitites of buy or sell 
 # WILL NEED BIG CHANGES TO GET THIS TO WORK 
-# SPRINT 3 
-def submitUserOrderHelper(): 
-    print()
+# SPRINT 4
+# def submitUserOrderHelper(): 
+#     print()
 
 
 # updateUserTransaction()
@@ -100,7 +103,6 @@ def submitUserOrder(request):
     BID_INCREMENT = Decimal(0.015)
 
     data = request.data
-    print(data)
     pk = data['pk']
     buy_sell = data['buy_sell']
     order_price = Decimal(data['price'])
@@ -333,6 +335,7 @@ def getUserProfile(request):
     user = request.user
     serializer = UserSerializer(user, many=False)
 
+
     # WORKOUT TO GET PROFILE BALANCE, copys 
     # data to 'info ' to get raw dic, edits dic, then returns 
     # new 'info' dic (previous return above current return)
@@ -402,6 +405,7 @@ def updateUserBalance(user, positive, balance_change):
             return False
 
         user.profile.balance = old_balance + Decimal(balance_change)
+        print('updateUserBalance, new balance :', user.profile.balance)
         user.save()
         
         return True 
