@@ -16,6 +16,7 @@ function SearchBox() {
         }
         else {
             history.push(history.location.pathname)
+            window.location.reload()
         }
     }
     return (
