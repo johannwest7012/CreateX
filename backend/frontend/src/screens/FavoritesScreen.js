@@ -43,7 +43,7 @@ function FavoritesScreen() {
                     <ListGroup variant='flush'>
                         {favItems.map(item => 
                             <ListGroup.Item key={item.creator}>
-                                <Row>
+                                <Row style={{marginBottom: '15px'}}>
                                     <Col md={2}>
                                         <Image src={item.image} alt={item.name} fluid roundedCircle/>
                                     </Col>

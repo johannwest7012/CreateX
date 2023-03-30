@@ -26,10 +26,12 @@ import {
     USER_SHARES_REQUEST,
     USER_SHARES_SUCCESS,
     USER_SHARES_FAIL,
+    USER_SHARES_RESET,
 
     USER_ORDER_HISTORY_REQUEST,
     USER_ORDER_HISTORY_SUCCESS,
     USER_ORDER_HISTORY_FAIL,
+    USER_ORDER_HISTORY_RESET
 
  } from '../constants/userConstants'
 
@@ -101,6 +103,8 @@ export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({ type:USER_LOGOUT })
     dispatch({ type:USER_DETAILS_RESET })
+    dispatch({ type:USER_ORDER_HISTORY_RESET})
+    dispatch({ type:USER_SHARES_RESET})
 
 }
 

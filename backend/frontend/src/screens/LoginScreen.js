@@ -20,7 +20,9 @@ function LoginScreen() {
     const dispatch = useDispatch()
 
     let location = useLocation();
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+
+    // originally was planning on doing history.push redirect but does not seem to work. 
+    //const redirect = location.search ? location.search.split('=')[1] : '/'
 
     // user login is in store.js
     const userLogin = useSelector(state => state.userLogin)
@@ -32,24 +34,26 @@ function LoginScreen() {
     // before they logged in 
     useEffect(() => {
         if(userInfo){
-            history.push(redirect)
+            history.push('/profile')
+            window.location.reload()
         }
-    }, [history, userInfo, redirect])
+    }, [history, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(login(email, password))
+
     }
 
     return (
     <FormContainer>
-        <h1>Sign In</h1>
+        <h1 style={{marginTop: '20px'}}>Sign In</h1>
 
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader/>}
 
         <Form onSubmit={submitHandler}>
-            <Form.Group controlId='email'>
+            <Form.Group controlId='email' style={{marginBottom: '20px'}}>
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                     type='email'
@@ -62,7 +66,7 @@ function LoginScreen() {
             </Form.Group>
 
 
-            <Form.Group controlId='password'>
+            <Form.Group controlId='password' style={{marginBottom: '20px'}}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                     type='password'
@@ -77,6 +81,7 @@ function LoginScreen() {
             <Button 
                 type='submit' 
                 variant='primary'
+                style={{marginBottom: '20px'}}
                >
                 Sign In
             </Button>

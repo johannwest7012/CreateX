@@ -6,6 +6,7 @@ import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
 // import myLogo from './CreateXlogo-white.svg'
 import myLogo from './logo_webflow.svg'
+import history from '../history'
 
 function Header() {
 
@@ -16,6 +17,8 @@ function Header() {
 
     const logoutHandler = () => {
         dispatch(logout())
+        history.push('/landing')
+        window.location.reload()
     }
 
 

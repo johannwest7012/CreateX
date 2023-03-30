@@ -22,7 +22,7 @@ function RegisterScreen() {
     const dispatch = useDispatch()
 
     let location = useLocation();
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    //const redirect = location.search ? location.search.split('=')[1] : '/'
 
     
     const userRegister = useSelector(state => state.userRegister)
@@ -34,9 +34,10 @@ function RegisterScreen() {
     // before they logged in 
     useEffect(() => {
         if(userInfo){
-            history.push(redirect)
+            history.push('/landing')
+            window.location.reload()
         }
-    }, [history, userInfo, redirect])
+    }, [history, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -50,14 +51,15 @@ function RegisterScreen() {
     }
     return (
         <FormContainer>
-            <h1>Sign In</h1>
+
+            <h1 style={{marginTop: '20px'}}>Sign Up</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader/>}
 
             <Form onSubmit={submitHandler}>
 
-                <Form.Group controlId='name'>
+                <Form.Group controlId='name' style={{marginBottom: '20px'}}>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         required
@@ -70,7 +72,7 @@ function RegisterScreen() {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId='email'>
+                <Form.Group controlId='email' style={{marginBottom: '20px'}}>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                         required
@@ -84,7 +86,7 @@ function RegisterScreen() {
                 </Form.Group>
 
 
-                <Form.Group controlId='password'>
+                <Form.Group controlId='password' style={{marginBottom: '20px'}}>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         required
@@ -97,7 +99,7 @@ function RegisterScreen() {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId='passwordConfirm'>
+                <Form.Group controlId='passwordConfirm' style={{marginBottom: '20px'}}>
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
                         required
@@ -110,7 +112,7 @@ function RegisterScreen() {
                     </Form.Control>
                 </Form.Group>
 
-                <Button type='submit' variant='primary'>
+                <Button type='submit' variant='primary' style={{marginBottom: '20px'}}>
                     Register
                 </Button>
             </Form>

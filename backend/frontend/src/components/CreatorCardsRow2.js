@@ -41,12 +41,19 @@ function CreatorCardsRow2() {
     const creatorList = useSelector(state => state.creatorList)
     const {error, loading, creators} = creatorList
 
+    const min = 4;
+    const max = creators.length - 1;
+    const end_range = Math.floor(Math.random() * (max - min + 1)) + min;
+    const start_range = end_range - 4
+
+
 
     useEffect(()=> {
         dispatch(listCreators())
         
     }, [dispatch])
 
+    
 
   
 
@@ -57,7 +64,7 @@ function CreatorCardsRow2() {
                 {loading ? <Loader />
                     : error ? <Message variant='danger'>{error}</Message>
                     : <Row>
-                    {creators.slice(0,4).map(creator => (
+                    {creators.slice(start_range,end_range).map(creator => (
                         <Col key={creator._id} sm={12} md={6} lg={4} xl={3}> 
                             <CreatorCard creator={creator}/>
                         </Col>

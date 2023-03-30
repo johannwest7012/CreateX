@@ -26,10 +26,12 @@ import {
     USER_SHARES_REQUEST,
     USER_SHARES_SUCCESS,
     USER_SHARES_FAIL,
+    USER_SHARES_RESET,
 
     USER_ORDER_HISTORY_REQUEST,
     USER_ORDER_HISTORY_SUCCESS,
     USER_ORDER_HISTORY_FAIL,
+    USER_ORDER_HISTORY_RESET
 
  } from '../constants/userConstants'
 
@@ -144,6 +146,9 @@ export const userSharesReducer = (state = {shares: []}, action) => {
         case USER_SHARES_FAIL: 
             return { loading:false, error: action.payload }
 
+        case USER_SHARES_RESET: 
+            return { shares: [] }
+
         default: 
             return state 
     }
@@ -159,6 +164,9 @@ export const userOrderHistoryReducer = (state = {order_history: []}, action) => 
         
         case USER_ORDER_HISTORY_FAIL: 
             return { loading:false, error: action.payload }
+
+        case USER_ORDER_HISTORY_RESET: 
+            return { order_history: [] }
 
         default: 
             return state 
