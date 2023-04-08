@@ -20,8 +20,7 @@ Createxenv/
 # testing
 /coverage
 
-# production
-/build
+
 
 # misc
 .DS_Store
@@ -45,7 +44,6 @@ __pycache__/
 
 # Distribution / packaging
 bin/
-build/
 develop-eggs/
 dist/
 eggs/
