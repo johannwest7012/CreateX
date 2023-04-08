@@ -45,7 +45,7 @@ if os.getcwd() == '/app':
 
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'createx.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'createx.herokuapp.com', '.herokuapp.com']
 
 
 # Application definition
@@ -108,6 +108,22 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
 }
 
 
