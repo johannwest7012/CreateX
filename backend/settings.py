@@ -129,8 +129,9 @@ LOGGING = {
 
 MIDDLEWARE = [
     # custom
-    "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+
+    "corsheaders.middleware.CorsMiddleware",
 
 
     # default
