@@ -35,7 +35,7 @@ function Header() {
                     <LinkContainer to='/landing' style={{ height: '70px', width: '60%' }}>
                         <Navbar.Brand> 
                             <img 
-                                src={myLogo} 
+                                src='https://createx-bucket.s3.us-east-2.amazonaws.com/brand/logo_webflow.svg'
                                 alt='CreateX'
                                 style={{ maxHeight: '100%', maxWidth: '100%' }}
                             />
