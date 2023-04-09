@@ -7,6 +7,8 @@ import {Card, Row, Col, Image, Button, Container, Stack} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import myLogo from './CreateX-red.svg'
+import myLogo2 from './images/CreateX-red.svg'
+
 
 const ParticleBackground = () => {
 
