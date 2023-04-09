@@ -32,7 +32,7 @@ const ParticleBackground = () => {
             <Col></Col>
             <Col>
                 <Stack gap={0}>
-                    <Image width='700' src={myLogo}/>
+                    <Image width='700' src='https://createx-bucket.s3.us-east-2.amazonaws.com/brand/CreateX-red.svg'/>
                     <Link to='/landing' className='btn btn-dark my-3'>Enter</Link>
                 </Stack>
             </Col>

@@ -26,7 +26,7 @@ function LandingScreen3() {
 
     const images = [
       
-        { url: "/slideshow2.png" },
+        { url: "https://createx-bucket.s3.us-east-2.amazonaws.com/brand/slideshow2.png" },
 
         
       ];
