@@ -17,7 +17,7 @@ function Header() {
 
     const logoutHandler = () => {
         dispatch(logout())
-        history.push('/landing')
+        history.push('#/landing')
         window.location.reload()
     }
 

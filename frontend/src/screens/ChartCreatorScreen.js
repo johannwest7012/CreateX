@@ -75,7 +75,7 @@ function ChartCreatorScreen() {
         //console.log('Add to favs:', params.id)
 
         // history path redirect needs fixing 
-        history.push(`/favorites/${params.id}`)
+        history.push(`#/favorites/${params.id}`)
         window.location.reload()
         
     }  
@@ -87,7 +87,7 @@ function ChartCreatorScreen() {
         
         // disallow if user does not have enough money 
         if (!userInfo) {
-            history.push('/login')
+            history.push('#/login')
             window.location.reload()
 
         }
@@ -103,7 +103,7 @@ function ChartCreatorScreen() {
                     'price' : creator.price
                 }))
                 setMessage('')
-                history.push('/profile/')
+                history.push('#/profile')
                 window.location.reload()
 
             }
@@ -113,7 +113,7 @@ function ChartCreatorScreen() {
     function submitSellHandler(){
 
         if (!userInfo) {
-            history.push('/login')
+            history.push('#/login')
             window.location.reload()
 
         }
@@ -134,7 +134,7 @@ function ChartCreatorScreen() {
                     'price' : creator.price
                 }))
                 setMessage('')
-                history.push('/profile/')
+                history.push('#/profile')
                 window.location.reload()
             }
             else { 
