@@ -11,7 +11,7 @@ function SearchBox() {
     const submitHandler = (e) => { 
         e.preventDefault()
         if (keyword){
-            history.push(`/home/?keyword=${keyword}`)
+            history.push(`#/home/?keyword=${keyword}`)
             window.location.reload()
         }
         else {
