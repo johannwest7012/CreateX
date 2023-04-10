@@ -26,8 +26,8 @@ function PortfolioScreen() {
         if(!userInfo){
             history.push('#/login')
         }else{
-            dispatch(getUserShares('shares'))
             dispatch(listCreators())
+            dispatch(getUserShares('shares'))
         }
     }, [dispatch, history, userInfo])
   
