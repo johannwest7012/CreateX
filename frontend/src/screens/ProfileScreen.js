@@ -43,7 +43,7 @@ function ProfileScreen() {
   
     useEffect(() => {
         if(!userInfo){
-            history.push('/login')
+            history.push('#/login')
             window.location.reload()
         }else{
             if(!user || !user.name || success){

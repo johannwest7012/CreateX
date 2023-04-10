@@ -24,7 +24,7 @@ function PortfolioScreen() {
 
     useEffect(() => {
         if(!userInfo){
-            history.push('/login')
+            history.push('#/login')
         }else{
             dispatch(getUserShares('shares'))
             dispatch(listCreators())

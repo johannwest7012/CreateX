@@ -34,7 +34,7 @@ function RegisterScreen() {
     // before they logged in 
     useEffect(() => {
         if(userInfo){
-            history.push('/landing')
+            history.push('#/landing')
             window.location.reload()
         }
     }, [history, userInfo])
