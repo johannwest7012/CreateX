@@ -34,7 +34,7 @@ function LoginScreen() {
     // before they logged in 
     useEffect(() => {
         if(userInfo){
-            history.push('/profile')
+            history.push('#/profile')
             window.location.reload()
         }
     }, [history, userInfo])
