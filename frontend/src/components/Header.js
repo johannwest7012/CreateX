@@ -17,8 +17,8 @@ function Header() {
 
     const logoutHandler = () => {
         dispatch(logout())
-        history.push('#/landing')
-        window.location.reload()
+        // history.push('#/landing')
+        // window.location.reload()
     }
 
 
@@ -74,7 +74,9 @@ function Header() {
                                         <NavDropdown.Item>Portfolio</NavDropdown.Item>
                                     </LinkContainer>
 
-                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    <LinkContainer to='/landing'>
+                                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    </LinkContainer>
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to="/login">
