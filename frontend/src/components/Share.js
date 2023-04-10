@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 
 function Share({ share }) {
-  console.log("ID: " + share._id)
+  console.log("ID: " + share.creator)
 
   const creatorList = useSelector(state => state.creatorList)
   const {error, loading, creators} = creatorList
