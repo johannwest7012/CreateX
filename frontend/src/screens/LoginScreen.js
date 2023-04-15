@@ -10,6 +10,7 @@ import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 
 import history from '../history'
+import { listCreators } from '../actions/creatorActions'
 
 
 function LoginScreen() {
@@ -36,13 +37,15 @@ function LoginScreen() {
         if(userInfo){
             history.push('#/profile')
             window.location.reload()
+            console.log('useEffect fired')
+
         }
     }, [history, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(login(email, password))
-
+        console.log('submitHandler fired')
     }
 
     return (

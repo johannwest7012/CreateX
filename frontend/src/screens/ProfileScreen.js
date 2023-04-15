@@ -11,6 +11,7 @@ import { getUserDetails, getUserOrderHistory, updateUserProfile } from '../actio
 import { USER_UPDATE_PROFILE_RESET } from'../constants/userConstants'
 
 import history from '../history'
+import { listCreatorDetails, listCreators } from '../actions/creatorActions'
 
 function ProfileScreen() {
 
@@ -32,7 +33,6 @@ function ProfileScreen() {
     const history_error = userOrderHistory.error
     const history_success = userOrderHistory.success
 
-    console.log('success' + history_success)
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -49,6 +49,8 @@ function ProfileScreen() {
             if(!user || !user.name || success){
                 dispatch({ type: USER_UPDATE_PROFILE_RESET })
                 dispatch(getUserDetails('profile'))
+                dispatch(listCreators(''))
+                //dispatch(listCreatorDetails())
             }else{
                 setName(user.name)
                 setEmail(user.email)

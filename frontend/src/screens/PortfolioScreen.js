@@ -8,28 +8,41 @@ import Message from '../components/Message'
 import history from '../history'
 
 
-
+import { getUserDetails } from '../actions/userActions'
 import { getUserShares } from '../actions/userActions'
 import { listCreators } from '../actions/creatorActions.js'
+
+import { USER_UPDATE_PROFILE_RESET } from'../constants/userConstants'
+
 
 
 function PortfolioScreen() {
     const dispatch = useDispatch()
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+
+    const userDetails = useSelector(state => state.userDetails)
+    const { error, loading, user } = userDetails
+
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     const shareList = useSelector(state => state.userShares)
-    const {error, loading, shares} = shareList
+    const shares = shareList.shares
+    const shares_success = shareList.success
+    const shares_loading = shareList.loading
+    const shares_error = shareList.error
+
 
     useEffect(() => {
         if(!userInfo){
             history.push('#/login')
         }else{
-            //dispatch(listCreators())
             dispatch(getUserShares('shares'))
         }
     }, [dispatch, history, userInfo])
+
   
 
     return (
@@ -38,8 +51,8 @@ function PortfolioScreen() {
             <Container>
                 <br></br>
                 <h1>Portfolio</h1>
-                {loading ? <Loader />
-                    : error ? <Message variant='danger'>{error}</Message>
+                {shares_loading ? <Loader />
+                    : shares_error ? <Message variant='danger'>{shares_error}</Message>
                     : <Row>
                     {shares.map(share => (
                         <Col key={share._id} sm={12} md={6} lg={4} xl={3}> 

@@ -16,11 +16,11 @@ function Share({ share }) {
 
   const creator_obj = creators.find(creator => creator._id === share.creator)
 
-  useEffect(() => {
-    if(creators.length === 0){
-        dispatch(listCreators())
-    }
-  }, [dispatch, creators])
+  // useEffect(() => {
+  //   if(creators.length === 0){
+  //       dispatch(listCreators())
+  //   }
+  // }, [dispatch, creators])
 
   return (
     <Card className='my-3 p-3 rounded'>
