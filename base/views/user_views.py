@@ -81,14 +81,8 @@ def updateUserProfile(request):
     return Response(serializer.data)
 
 
-# The helper is called in a loop for multiple quanitites of buy or sell 
-# WILL NEED BIG CHANGES TO GET THIS TO WORK 
-# SPRINT 4
-# def submitUserOrderHelper(): 
-#     print()
 
-
-# updateUserTransaction()
+# submitUserOrder(request)
 # takes user when they buy a share/token
 # updates their balance accordingly 
 # updates their portfolio accordingly 
@@ -327,7 +321,254 @@ def submitUserOrder(request):
         return Response(serializer.data)
 
 
+
+
+
+
+
+
+# updateUserTransactionV2()
+# this will require a change in logic 
+    # orders with quanitity will have to consistently search among the smaller open order to find 
+    # a combination that can fulfill it, smaller orders will have priority but that makes sense 
+# takes user when they buy a share/token
+# updates their balance accordingly 
+# updates their portfolio accordingly 
+# works with quantities  
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def submitUserOrderV2(request):
+
+    # The margin for the market making 
+    MARGIN = Decimal(0.01)
+    BID_INCREMENT = Decimal(0.015)
+
+    data = request.data
+    pk = data['pk']
+    buy_sell = data['buy_sell']
+    order_price = Decimal(data['price'])
+    quantity = int(data['quantity'])
+    creator_obj = Creator.objects.get(_id=pk)
+
+    if buy_sell == 'buy' and request.user.profile.balance > order_price: 
+        try: 
+            order = buyOrderShare.objects.create(
+                user = request.user,
+                creator = creator_obj,
+                price = order_price,
+                isFulfilled = False,
+            )
+            serializer = buyOrderShareSerializer(order, many=False)
+
+        except:
+            message  = {'detail':'Could not create OrderShare (failed in buy try except)'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+    elif buy_sell == 'sell': 
+        try:
+            chosen_share = CreatorShare.objects.filter(creator = creator_obj).filter(in_transit = False).filter(user = request.user)[0]
+            order = sellOrderShare.objects.create(
+                user = request.user,
+                creator = creator_obj,
+                price = order_price,
+                isFulfilled = False,
+                share = chosen_share,
+            )
+            chosen_share.in_transit = True 
+            chosen_share.save()
+            serializer = sellOrderShareSerializer(order, many=False)
+
+        except:
+            message  = {'detail':'Could not create OrderShare (failed in sell try except)'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+    else: 
+        message  = {'detail':'Could not create OrderShare (order type not buy or sell, or user does not have enough balance)'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    #####
+
+    # Search for existing matching sell order 
+    # Get mirrored orders with same creator 
+    #   Of those order search for one with price 'in range' 
+    #       Match orders : user who is buying gets ownership of share, subtract price from balance 
+    #                      user who is selling loses ownership of share, add price to balance 
+
+
+    # The process of matching an order can and probably should be its own function, may be used elsewhere 
+    if (buy_sell == 'buy'):
+
+        creator_sell_order_arr = sellOrderShare.objects.filter(isFulfilled = False).filter(creator = creator_obj).exclude(user = request.user).order_by('price')
+        for i in creator_sell_order_arr: 
+            print(i)
+        
+        found = False 
+
+        for i in creator_sell_order_arr: 
+            # search for sell order with a price less than or equal to 99% of the buy order, you keep the 1%
+            if i.price <= (order_price * (Decimal(1.00) - MARGIN)): 
+                #FOUND MATCH 
+                found = True 
+                match_sell_order = i 
+                break
+
+        if found: 
+
+            print('Order :', order )
+            print('Match sell order :', match_sell_order)
+
+            buyer = request.user
+            seller = match_sell_order.user
+
+            #Transfer share 
+            share = match_sell_order.share 
+            share.user = buyer
+
+            #Mark this share as the share for both orders
+            order.share = share 
+            match_sell_order.share = share 
+
+            #Mark both orders as fulfilled 
+            order.isFulfilled = True 
+            match_sell_order.isFulfilled = True 
+            
+            #Subtract balance from buyer 
+            # buyer.profile.balance = buyer_current_balance - order_price
+            updateUserBalance(buyer, False, order.price)
+
+            #Add balance to seller 
+            # seller.profile.balance = seller_current_balance + match_sell_order.price
+            updateUserBalance(seller, True, match_sell_order.price)
+
+            #Calculate profit 
+            profit = order.price - match_sell_order.price
+            print('Market making profit:', profit)
+
+            #Mark share as NO LONGER in transit 
+            share.in_transit = False 
+
+            order.save()
+            match_sell_order.save()
+            share.save()
+            buyer.save()
+            seller.save()
+            
+            serializer = buyOrderShareSerializer(order, many=False)
+            print('Match Found: ', match_sell_order)
+
+
+        else: 
+            order.save()
+            print('No match found, order will be backlogged')
+            # do not match, leave order be 
+
+        # Buy price tracking update 
+        creator_obj.price = (creator_obj.price * (Decimal(1.00) + (BID_INCREMENT)))
+        creator_obj.save()
     
+        #Add to price log 
+        new_price_log = creatorPriceLog.objects.create(
+                creator = creator_obj,
+                cur_price = creator_obj.price,
+            )
+        new_price_log.save()
+
+        return Response(serializer.data)
+
+
+
+
+        # CHANGE EVENTUALLY for optmiz CreatorShare should not be its own obj see figma notes 
+        #transfer share from seller to buyer 
+        # get the array of shares 
+        # 1. get arr of CreatorShares owned by our seller
+        # 2. get arr of CreatorShares of the Creator, isolate the first in arr they are fungible
+
+
+    # Search for existing matching buy order 
+    elif (buy_sell == 'sell'): 
+
+        # order by highest price to lowest price, you want to fulfill the order for the user who is willing to pay the most first  
+        creator_buy_order_arr = buyOrderShare.objects.filter(isFulfilled = False).filter(creator = creator_obj).exclude(user = request.user).order_by('-price')
+        for i in creator_buy_order_arr: 
+            print(i)
+
+
+        found = False 
+        # search for a buy order that is greater or equal to 101% of the sell order price, you keep the 1% 
+        # IMPLEMENT EDGE CASE : there are buy orders greater than the sell order price but not by a whole 1%
+        for i in creator_buy_order_arr: 
+            # checks to see if buy order we are iterated on is in the right price range, and they buyer has the funds
+            if i.price >= (order_price * (Decimal(1.00) + MARGIN)) and i.user.profile.balance >= order.price: 
+                #FOUND MATCH 
+                found = True 
+                match_buy_order = i 
+                break
+
+        if found: 
+
+            print('Order :', order )
+            print('Match buy order :', match_buy_order)
+
+            seller = request.user
+            buyer = match_buy_order.user
+
+            #Transfer share 
+            share = order.share
+            share.user = buyer
+
+            #Mark this share as the share for both orders (already marked for 'order' in init)
+            match_buy_order.share = share 
+
+            #Mark both orders as fulfilled 
+            order.isFulfilled = True 
+            match_buy_order.isFulfilled = True 
+            
+            #Subtract balance from buyer 
+            # We matched to a buy order, so the buyer pays the price they set
+            # buyer.profile.balance = buyer_current_balance - match_buy_order.price
+            updateUserBalance(buyer, False, match_buy_order.price)
+
+            #Add balance to seller 
+            # This is a sell order, so seller gets the price they set
+            # seller.profile.balance = seller_current_balance + order.price
+            updateUserBalance(seller, True, order.price)
+
+            #Calculate profit 
+            profit = match_buy_order.price - order.price
+            print('Market making profit:', profit)
+
+            #Mark share as NO LONGER in transit 
+            share.in_transit = False 
+
+            order.save()
+            match_buy_order.save()
+            share.save()
+            buyer.save()
+            seller.save()
+
+            serializer = sellOrderShareSerializer(order, many=False)
+            print('Match Found: ', match_buy_order)
+
+        else: 
+            order.save()
+            print('No match found, order will be backlogged')
+            # do not match, leave order be 
+        
+        # SELL price tracking update 
+        creator_obj.price = (creator_obj.price * (Decimal(1.00) - (BID_INCREMENT)))
+        creator_obj.save()
+
+        #Add to price log 
+        new_price_log = creatorPriceLog.objects.create(
+                creator = creator_obj,
+                cur_price = creator_obj.price,
+            )
+        new_price_log.save()
+
+
+        return Response(serializer.data)
+
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

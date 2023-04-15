@@ -17,7 +17,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+print("BASE DIR : ", BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -110,21 +110,21 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#              'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+#         },
+#     },
+# }
 
 
 MIDDLEWARE = [
@@ -234,10 +234,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
 # tell django about static files folder
-STATICFILES_DIRS = [ 
+STATICFILES_DIRS = [
     BASE_DIR / 'static', 
-    BASE_DIR / 'frontend/build/static'
+    BASE_DIR / 'frontend/build', 
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static')
 ]
+print("STATICFILES_DIR",os.path.join(BASE_DIR, 'frontend', 'build', 'static'))
 
 # for user uploaded content 
 # (anytime we have a file uploaded from a model, where to upload those folders)

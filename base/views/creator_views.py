@@ -49,7 +49,7 @@ from django.contrib.auth.models import User
 @api_view(['GET'])
 def getCreators(request): 
     query = request.query_params.get('keyword')
-    print('query:', query)
+    #print('query:', query)
     if query == None: 
         query = ''
 
