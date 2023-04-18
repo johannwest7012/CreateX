@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Container } from 'react-bootstrap'
+import { useSearchParams } from 'react-router-dom';
+
 import Creator from '../components/Creator'
 import CreatorCard from '../components/CreatorCard'
 import Loader from '../components/Loader'
@@ -17,10 +19,21 @@ function HomeScreen() {
     const {error, loading, creators} = creatorList
 
     let keyword = history.location.search
-    console.log(keyword)
+    console.log('keyword: ' + keyword)
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    var keyword2 = searchParams.get("keyword"); 
+
+    if (keyword2 === null) { 
+        keyword2 = ''
+    }
+    keyword2 = '?keyword=' + keyword2
+    console.log('keyword2: ' + keyword2)
+
+
 
     useEffect(()=> {
-        dispatch(listCreators(keyword))
+        dispatch(listCreators(keyword2))
         
     }, [dispatch, keyword])
 

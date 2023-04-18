@@ -15,7 +15,7 @@ function SearchBox() {
             window.location.reload()
         }
         else {
-            history.push(history.location.pathname)
+            history.push(`#/home/?keyword=${''}`)
             window.location.reload()
         }
     }
