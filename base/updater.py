@@ -5,9 +5,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import random 
 
 def start():
-    # scheduler = BackgroundScheduler()
-    # scheduler.add_job(mockMarket, 'interval', seconds=30)
-    # scheduler.start()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(mockMarket, 'interval', seconds=30)
+    scheduler.start()
     print()
 
 
@@ -22,6 +22,8 @@ def mockMarket():
     buy_sell = ''
     price = 10
     quantity = 2
+
+    #try: 
 
     rando = random.randint(0,1)
     if rando == 0: 
@@ -41,12 +43,13 @@ def mockMarket():
         rando = random.randint(0, (len(creator_list)-1))
         creator = creator_list[rando]
         quantity = random.randint(1,10)
-        price = creatorPriceLog.objects.filter(creator = creator).order_by('-_id')[0]
+        pricelog = creatorPriceLog.objects.filter(creator = creator).order_by('-_id')[0]
+        price = pricelog.cur_price
+
 
 
     
     else: 
-        quant = random.randint(0,10)
         # get a creator they own shares for 
         # get a random number between 0 and the max number of shares they own for the creator
         shares = CreatorShare.objects.filter(user = chosen_user).filter(in_transit = False)
@@ -54,9 +57,10 @@ def mockMarket():
         chosen_share = shares[rando]
         creator = chosen_share.creator
         creator_shares = shares.filter(creator = creator)
-        rando = random.randint(1, (len(creator_shares)-1))
-        if rando > 10: 
-            rando = 10 
+        if len(creator_shares) < 10:
+            rando = random.randint(1, (len(creator_shares)-1))
+        else: 
+            rando = random.randint(1, 10)
         quantity = rando 
         pricelog = creatorPriceLog.objects.filter(creator = creator).order_by('-_id')[0]
         price = pricelog.cur_price
@@ -71,7 +75,10 @@ def mockMarket():
     temp = Order
     submitUserOrderV2INTERNAL(temp)
     print(temp.data)
-    
+
+    # except:
+    #     message  = 'FAILED MOCKKMARKET() in try except block'
+    #     print(message)
 
 
 #  dispatch(submitUserOrder({
