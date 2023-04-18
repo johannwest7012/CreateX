@@ -30,7 +30,7 @@ class Profile(models.Model):
     #shares = ArrayField(ArrayField(models.IntegerField()))
 
     def __str__(self):
-        return str("user: " + str(self.user) + "   balance: " + str(self.balance))
+        return str("id:" + str(self.user.id) + "  user: " + str(self.user) + "   balance: " + str(self.balance))
 
 
 # Creates a user PROFILE whenever a user is created
@@ -124,9 +124,13 @@ class buyOrderShare(models.Model):
     share = models.ForeignKey(CreatorShare, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     order_type = models.CharField(max_length=10, default='BUY', editable=False)
+    quantity = models.IntegerField(null=True, blank=True, default=1)
+
+    shares_list = ArrayField(models.IntegerField(), null=True)
+
 
     def __str__(self) -> str:
-        return str("share_id: " + str(self.share) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
+        return str("_id: " + str(self._id) + "share_id: " + str(self.share) + "  shares_list: " + str(self.shares_list) +  "  creator id: " + str(self.creator) + "  price: " + str(self.price) +  "  quant: " + str(self.quantity) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
 
 class sellOrderShare(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
@@ -138,10 +142,14 @@ class sellOrderShare(models.Model):
     share = models.ForeignKey(CreatorShare, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     order_type = models.CharField(max_length=10, default='SELL', editable=False)
+    quantity = models.IntegerField(null=True, blank=True, default=1)
+
+    shares_list = ArrayField(models.IntegerField(), null=True)
+
 
 
     def __str__(self) -> str:
-        return str("share_id: " + str(self.share) + "  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
+        return str("_id: " + str(self._id) + "share_id: " + str(self.share) + "  shares_list: " + str(self.shares_list) +"  creator id: " + str(self.creator) + "  price: " + str(self.price) + "  quant: " + str(self.quantity) +"  user id: " + str(self.user) + " isFulfilled: " + str(self.isFulfilled))
 
 # NOT CURRENTLY USED but will implement for accounting purposes  
 class OrderToken(models.Model):

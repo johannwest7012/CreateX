@@ -62,6 +62,7 @@ function CreatorScreen() {
         // will be matched with someone else's sell order 
         
         // disallow if user does not have enough money 
+        console.log('SubmitBuyHandler')
         if (!userInfo) {
             history.push('/login')
             window.location.reload()
@@ -72,12 +73,13 @@ function CreatorScreen() {
                 setMessage('Balance insufficent')
             }
             else{ 
+                console.log(qty)
                 dispatch(submitUserOrder({
                     'id' : user.id, 
                     'pk' : creator._id,
                     'buy_sell' : 'buy',
                     'price' : creator.price,
-                    'quantity' : 1
+                    'quantity' : qty
                 }))
                 setMessage('')
                 history.push('/profile/')
@@ -104,12 +106,13 @@ function CreatorScreen() {
             }
 
             if (pass === true) { 
+                console.log(qty)
                 dispatch(submitUserOrder({
                     'id' : user.id, 
                     'pk' : creator._id,
                     'buy_sell' : 'sell',
                     'price' : creator.price, 
-                    'quantity' : 1
+                    'quantity' : qty
                 }))
                 setMessage('')
                 history.push('/profile/')

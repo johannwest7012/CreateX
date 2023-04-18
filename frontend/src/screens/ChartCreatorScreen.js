@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams} from 'react-router-dom'
 
-import { Row, Col, Image, ListGroup, Button, Card, Form, Container} from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button,ButtonGroup, Card, Form, Container} from 'react-bootstrap'
 import { listCreatorDetails, listCreatorPriceLog } from '../actions/creatorActions.js'
 import { getUserShares } from '../actions/userActions'
 
@@ -32,6 +32,27 @@ import {
 
 function ChartCreatorScreen() {
 
+
+
+
+
+    const [quantity, setQuantity] = useState(1);
+
+    const handleIncrease = () => {
+        if (quantity === 10){ 
+            setQuantity(quantity)
+        }
+        else{
+            setQuantity(quantity + 1);
+        }
+    };
+  
+    const handleDecrease = () => {
+      if (quantity > 1) {
+        setQuantity(quantity - 1);
+      }
+    };
+
     // FOR THE GRID 
     const theme = useTheme();
 
@@ -40,7 +61,6 @@ function ChartCreatorScreen() {
 
 
     // this quanitity function applies to BUY or SELL button 
-    const [qty, setQty] = useState(1)
 
     const [message, setMessage] = useState('')
 
@@ -100,7 +120,8 @@ function ChartCreatorScreen() {
                     'id' : user.id, 
                     'pk' : creator._id,
                     'buy_sell' : 'buy',
-                    'price' : creator.price
+                    'price' : creator.price, 
+                    'quantity' : quantity
                 }))
                 setMessage('')
                 history.push('#/profile')
@@ -131,7 +152,8 @@ function ChartCreatorScreen() {
                     'id' : user.id, 
                     'pk' : creator._id,
                     'buy_sell' : 'sell',
-                    'price' : creator.price
+                    'price' : creator.price, 
+                    'quantity' : quantity
                 }))
                 setMessage('')
                 history.push('#/profile')
@@ -269,12 +291,12 @@ function ChartCreatorScreen() {
                                             <Row>
                                                 <Col>Qty:</Col>
                                                 <Col xs='auto' className='my-1'>
-                                                    <Form.Control
-                                                        type='number'
-                                                        as='textarea'
-                                                        onChange={(e) => setQty(e.target.value)}
-                                                    >
-                                                    </Form.Control>
+                                    
+                                                    <ButtonGroup>
+                                                        <Button variant="secondary" onClick={handleDecrease}>-</Button>
+                                                        <Button variant="secondary">{quantity}</Button>
+                                                        <Button variant="secondary" onClick={handleIncrease}>+</Button>
+                                                    </ButtonGroup>
                                         
                                                 </Col>
                                             </Row>

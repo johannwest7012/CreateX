@@ -19,9 +19,9 @@ function CreatorCard({ creator }) {
             </Col>
             <Col>
                 <Row><h6>{creator.name}</h6></Row>
-                <Row><span style={{'font-size': 'smaller'}}>111M Subscribers</span></Row>
+                <Row><span style={{'fontSize': 'smaller'}}>111M Subscribers</span></Row>
                 <Row>
-                    <h4 style={{'margin-top':'10px'}}> ${(creator.price).slice(0,-1)}</h4>
+                    <h4 style={{'marginTop':'10px'}}> ${(creator.price).slice(0,-1)}</h4>
                 </Row>        
             </Col>
         </Row>

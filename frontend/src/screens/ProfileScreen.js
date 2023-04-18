@@ -42,6 +42,8 @@ function ProfileScreen() {
 
   
     useEffect(() => {
+        dispatch(getUserOrderHistory())
+
         if(!userInfo){
             history.push('#/login')
             window.location.reload()
@@ -57,9 +59,10 @@ function ProfileScreen() {
                 setBalance(user.balance)
             }
         }
-        if(!order_history || !history_success){
-            dispatch(getUserOrderHistory())
-        }
+        // if(!order_history || !history_success){
+        //     dispatch(getUserOrderHistory())
+        // }
+
     }, [dispatch, history, userInfo, user, success])
 
     const submitHandler = (e) => {

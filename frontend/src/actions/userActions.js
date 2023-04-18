@@ -271,10 +271,10 @@ export const submitUserOrder = (order) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-
+        console.log(order)
         // shows its a put request
         const {data} = await axios.put(
-            `/api/users/profile/submitOrder/`,
+            `/api/users/profile/submitOrderV2/`,
             order,
             config
         )
@@ -288,7 +288,7 @@ export const submitUserOrder = (order) => async (dispatch, getState) => {
         
 
         // sets local storage with new user information 
-        localStorage.setItem('userInfo', JSON.stringify(data))
+        //localStorage.setItem('userInfo', JSON.stringify(data))
 
 
     } catch(error){

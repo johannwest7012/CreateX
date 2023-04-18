@@ -7,3 +7,6 @@ class BaseConfig(AppConfig):
 
     def ready(self):
         import base.signals
+        from .updater import start
+        # start the updater process 
+        start()

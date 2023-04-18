@@ -8,10 +8,12 @@ import { listCreators } from '../actions/creatorActions.js'
 
 function Order({ order }) {
 
-
-    const processed = "Processing"
-    if (order.is_fulfilled){
+    console.log(order)
+    var processed = "Processing"
+    var color = "orange"
+    if (order.isFulfilled === true){
         processed = "Order fulfilled"
+        color = "green"
     }
     return (
       <Card className='my-3 p-3 rounded'>
@@ -24,7 +26,7 @@ function Order({ order }) {
                   <h6>Type: {order.order_type}</h6>
                   <h6>Creator: {order.creator}</h6>
                   <h6>Price: {order.price}</h6>
-                  <h6>Order Status: {processed}</h6>
+                  <h6 style={{'color':color}}>Order Status: {processed}</h6>
           </Card.Body>
       </Card>
     )
